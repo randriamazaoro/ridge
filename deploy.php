@@ -24,6 +24,7 @@ add('writable_dirs', []);
 
 host('138.68.141.65')
     ->user('deployer')
+    ->multiplexing(false)
     ->identityFile('~/.ssh/deployerkey')
     ->set('deploy_path', '/var/www/html/ridge');  
     
