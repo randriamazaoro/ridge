@@ -7,7 +7,7 @@ require 'recipe/laravel.php';
 set('application', 'Ridge');
 
 // Project repository
-set('repository', 'git@github.com:randriamazaoro/repository.git');
+set('repository', 'git@github.com:randriamazaoro/ridge.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true); 
