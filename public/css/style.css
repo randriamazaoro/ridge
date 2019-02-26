@@ -1,0 +1,13 @@
+.has-background-image
+{
+	background: url(../img/test.jpg);
+	background-position: center;
+	background-size: cover;
+}
+
+.has-background-image-2
+{
+	background: url(../img/test2.jpg);
+	background-position: center;
+	background-size: cover;
+}
