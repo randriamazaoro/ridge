@@ -473,11 +473,11 @@
 
                             <!-- RIGHT TEXT -->
                             <div class="column is-5">
-                                @include('themes.Mini')
+                                @include('themes.mini')
 
-                                @include('themes.Maxi')
+                                @include('themes.maxi')
 
-                                @include('themes.Ultra')
+                                @include('themes.ultra')
 
                             </div>
                         </div>
