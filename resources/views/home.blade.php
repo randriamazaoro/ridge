@@ -95,7 +95,7 @@
             <div class="columns is-multiline has-text-right">
                 <div class="column is-12 content">
                     <p>
-                        <b>Une style de vie</b><br />
+                        <b>Un style de vie</b><br />
                         Travailler librement à travers le digital, sans la
                         contrainte d'une hiérarchie.
                     </p>
