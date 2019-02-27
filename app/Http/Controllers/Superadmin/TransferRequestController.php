@@ -22,6 +22,12 @@ use App\Http\Controllers\Controller;
 
 class TransferRequestController extends Controller
 {
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	    $this->middleware('superadmin');
+	}  
+	
     public function show($id)
 	{
 		$user = User::findOrFail($id);

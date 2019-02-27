@@ -149,6 +149,8 @@ return [
         'last_name'             => 'nom',
         'password'              => 'mot de passe',
         'password_confirmation' => 'confirmation du mot de passe',
+        'current_password'      => 'mot de passe actuel',
+        'new_password'          => 'nouveau mot de passe',
         'city'                  => 'ville',
         'country'               => 'pays',
         'address'               => 'adresse',

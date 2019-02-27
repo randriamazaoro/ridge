@@ -30,6 +30,7 @@ class UserHasRequestedEbook extends Mailable
     public function build()
     {
         return $this->markdown('emails.user.has-requested-ebook')
+                    ->subject('Voici votre e-book gratuit: Super Affiliation !')
                     ->with('token', $this->token);
     }
 }

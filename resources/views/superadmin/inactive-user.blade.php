@@ -1,7 +1,7 @@
 @extends('layouts.min.app')
 
 @section('title')
-	 | Dashboard
+	 | {{ $user->first_name }} {{ $user->last_name }}
 @endsection
 
 @section('content')

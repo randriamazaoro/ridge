@@ -208,7 +208,7 @@
 
 </section>
 
-@include('modals.settings')
+@include('admin.partials.settings')
 
 
 

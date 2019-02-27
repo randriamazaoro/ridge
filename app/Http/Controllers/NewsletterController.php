@@ -20,7 +20,7 @@ class NewsletterController extends Controller
 
     	$newsletter_emails = new NewsletterEmail;
         $newsletter_emails->email = $request->email;
-    	$newsletter_emails->token = Hash::make($request->email);
+    	$newsletter_emails->token = str_random(32);
         $newsletter_emails->downloaded = false;
     	$newsletter_emails->save();
 
@@ -41,7 +41,7 @@ class NewsletterController extends Controller
         if (isset($newsletter_email) && $newsletter_email->downloaded == false){
 
             $newsletter_email->downloaded = true;
-            return Storage::download('public\DotCom-Secrets.pdf');
+            return Storage::download('public\SuperAffiliation.pdf');
         }
 
         return redirect('/');

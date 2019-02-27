@@ -54,7 +54,6 @@
 			@slot('gains_per_email') {{ $program->gains_per_email }} @endslot
 			@slot('gains_per_sale') {{ $program->gains_per_sale * 100 }} @endslot
 			@slot('social') {{ $program->social }} @endslot
-			@slot('advantages') {{ $program->advantages }} @endslot
 		@endcomponent 	
 
 	<br />
@@ -110,7 +109,7 @@
 <nav class="navbar is-fixed-bottom is-perfectly-centered columns">
 	<div class="column is-3 has-text-centered">
 		<a 
-			href="{{ url('admin/settings/upgrade/store') }}" 
+			href="{{ url('paypal/express-checkout') }}" 
 			class="button is-rounded is-primary"
 			>Valider et proceder au paiement</a>
 	</div>

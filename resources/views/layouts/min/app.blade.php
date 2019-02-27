@@ -20,7 +20,7 @@
 
     @yield('content')
 
-    @include('partials.min.footer')
+    @include('partials.footer')
     @include('modals.prompt')
     @include('modals.feedbacks')
 

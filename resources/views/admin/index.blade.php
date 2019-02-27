@@ -247,7 +247,7 @@
                 <p>
                     <b>Votre lien de référence:</b><br />
                     <a href="{{ url('register?ref='.$affiliate->id) }}">
-                        https://ridge.io/register?ref={{$affiliate->id}}
+                        {{ config('app.url') }}/register?ref={{$affiliate->id}}
                     </a>
                 </p>
                 <p>

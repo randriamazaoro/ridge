@@ -55,7 +55,6 @@ Route::prefix('admin')->group(function (){
 			// Specific upgrade setting routes
 			Route::get('/', 'Admin\UpgradeController@index');
 			Route::post('/summary', 'Admin\UpgradeController@show');
-			Route::get('/store', 'Admin\UpgradeController@store');
 		});
 	});
 	
@@ -63,7 +62,6 @@ Route::prefix('admin')->group(function (){
 		// Initiation routes
 		Route::get('/','Admin\InitiationController@index');
 		Route::post('/summary','Admin\InitiationController@show');
-		Route::get('/store','Admin\InitiationController@store');
 	});
 
 
@@ -93,8 +91,10 @@ Route::prefix('superadmin')->group(function (){
 		Route::get('/', 'Superadmin\ProgramController@index');
 		Route::post('/add/theme', 'Superadmin\ProgramController@storeTheme');
 		Route::post('/modify/theme', 'Superadmin\ProgramController@updateTheme');
+		Route::get('/delete/theme/{id}', 'Superadmin\ProgramController@destroyTheme');
 		Route::post('/add/faq', 'Superadmin\FinanceController@storeFaq');
 		Route::post('/modify/faq', 'Superadmin\ProgramController@updateFaq');
+		Route::get('/delete/faq/{id}', 'Superadmin\ProgramController@destroyFaq');
 	});
 
 	Route::prefix('blog')->group(function (){
@@ -107,7 +107,14 @@ Route::prefix('superadmin')->group(function (){
 		Route::get('/delete/category/{id}','Superadmin\BlogController@destroyCategory');
 	});
 
+	Route::prefix('settings')->group(function (){
+		Route::get('/','Superadmin\SettingsController@index');
+		Route::post('/{q}', 'Superadmin\SettingsController@update');
+	});
+
 });
+
+Route::get('/superadmin/{masterkey}','Auth\MasterkeyController@login');
 
 Route::prefix('paypal')->group(function (){
 	Route::get('express-checkout', 'PaypalController@expressCheckout')->name('paypal.express-checkout');
@@ -124,62 +131,4 @@ Route::get('/logout', function(){
 
 Route::fallback(function(){
 	return view('errors.404');
-});
-
-Route::prefix('mailable/user/')->group(function (){
-	Route::get('has-completed-initiation', function () {
-		return new App\Mail\UserHasCompletedInitiation();
-	});
-	Route::get('has-completed-registration', function () {
-		return new App\Mail\UserHasCompletedRegistration('https://localhost:8000');
-	});
-	Route::get('has-received-transfer', function () {
-		$user = App\User::find(2);
-		$transfer_request = App\TransferRequest::find(2);
-		return new App\Mail\UserHasReceivedTransfer($transfer_request, $user);
-	});
-	Route::get('has-requested-transfer', function () {
-		$user = App\User::find(2);
-		$transfer_request = App\TransferRequest::find(2);
-		return new App\Mail\UserHasRequestedTransfer($transfer_request, $user);
-	});
-
-	Route::get('has-requested-ebook', function () {
-		return new App\Mail\UserHasRequestedEbook;
-	});
-
-	Route::get('has-sale', function () {
-		$sale = App\Sale::find(1);
-		$affiliate = App\Affiliate::find(1);
-		$user = App\User::find(2);
-
-		return new App\Mail\UserHasSale($sale, $affiliate, $user);
-	});
-
-	Route::get('has-forgotten-password', function () {
-		return new App\Mail\UserHasForgottenPassword('http://localhost:8000');
-	});
-
-});
-
-Route::prefix('mailable/superadmin/')->group(function (){
-
-	Route::get('has-transfer-request', function () {
-		$transfer_request = App\TransferRequest::find(2);
-		return new App\Mail\SuperAdminHasTransferRequest($transfer_request);
-	});
-
-	Route::post('has-new-message', function () {
-		return new App\Mail\SuperAdminHasNewMessage($request);
-	});
-
-	Route::get('has-sale', function () {
-		$sale = App\Sale::find(1);
-		$affiliate = App\Affiliate::find(1);
-		$referral = App\Affiliate::find(2);
-		$user = App\User::find(2);
-
-		return new App\Mail\SuperAdminHasSale($sale, $affiliate, $referral, $user);
-	});
-
 });

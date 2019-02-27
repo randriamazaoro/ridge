@@ -95,12 +95,11 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
+                            </div>
                     </div>
                 </div>
 
-                <div class="step-content is-active">
+                <div class="step-content">
                     <div class="columns is-vcentered is-centered">
 
                         <div class="column is-4">
@@ -434,6 +433,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
 
                     <div class="step-content">
@@ -454,7 +454,6 @@
                                     @slot('gains_per_email') {{ $program->gains_per_email }} @endslot
                                     @slot('gains_per_sale') {{ $program->gains_per_sale * 100}} @endslot
                                     @slot('social') {{ $program->social }} @endslot
-                                    @slot('advantages') {{ $program->advantages }} @endslot
 
                                     <input type="radio" class="is-checkradio is-primary is-large" name="program" id="{{ $program->name }}"
                                         value="{{ $program->name }}" onclick="showProgramThemes()" data-validate="require"
@@ -533,27 +532,7 @@
                     </div>
                 </div>
 
-                <div class="step-item is-active"><span class="step-marker">1</span></div>
-
-                <div class="step-item">
-                    <div class="step-marker">2</div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-marker">3</div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-marker">4</div>
-                </div>
-
-                <div class="step-item">
-                    <div class="step-marker">5</div>
-                </div>
-
-                <br />
-
-                <div class="steps-actions is-fixed-bottom navbar">
+            <div class="steps-actions is-fixed-bottom navbar">
                     <div class="steps-action">
                         <a href="#" data-nav="previous" class="button is-primary is-rounded is-outlined">Précédent</a>
                     </div>
@@ -563,21 +542,39 @@
                     </div>
                 </div>
 
+            <div class="step-item is-active"><span class="step-marker">1</span></div>
 
+            <div class="step-item">
+                <div class="step-marker">2</div>
             </div>
 
+            <div class="step-item">
+                <div class="step-marker">3</div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-marker">4</div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-marker">5</div>
+            </div>
+        </div>
     </form>
 
 
 
+
 </section>
+<br/>
+<br/>
 
 
 
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{ asset('js/bulma-steps.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bulma-steps.min.js') }}"></script>
 <script type="text/javascript">
     bulmaSteps.attach();
 </script>

@@ -22,7 +22,7 @@
                 <div class="box animated bounceIn">
                     <div class="is-perfectly-centered">
                         <figure class="image is-128x128">
-                            <img src="{{ asset('svg/Mini.svg') }}" />
+                            <img src="{{ asset('svg/mini.svg') }}" />
                         </figure>
                     </div>
                     <br />
@@ -250,7 +250,7 @@
                         <div class="is-perfectly-centered">
                             <figure class="image is-128x128">
                                 <img src="{{
-                                asset("svg/{$program->name}.svg")}}" />
+                                asset("svg/".strtolower($program->name).".svg")}}" />
                             </figure>
                         </div>
                         <br />
@@ -280,10 +280,6 @@
                             </li>
                             <br />
                             <li><b>Social :</b> {{ $program->social }}</li>
-                            <br />
-                            <li>
-                                <b>Avantages :</b> {{ $program->advantages }}
-                            </li>
                         </ul>
                     </div>
                 </div>

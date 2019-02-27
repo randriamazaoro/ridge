@@ -43,13 +43,24 @@
                     </a>
                     <div class="navbar-dropdown is-boxed">
 
-                        @if(Auth::user()->status == 'Actif')
-                        <a href="{{ url('admin') }}" class="navbar-item has-text-black"> Mon Espace </a>
-                        <a href="{{ url('admin/settings') }}" class="navbar-item has-text-black"> Paramètres de mon compte </a>
-
-                        @else
-                        <a href="{{ url('admin/initiation') }}" class="navbar-item has-text-black"> Initiation </a>
-
+                        @if(Auth::user()->role == 0)
+                            @if(Auth::user()->status == 'Actif')
+                            <a href="{{ url('admin') }}" class="navbar-item"> Mon Espace </a>
+                            <a href="{{ url('admin/settings') }}" class="navbar-item"> Paramètres de mon compte </a>
+    
+                            @else
+                            <a href="{{ url('admin/initiation') }}" class="navbar-item"> Initiation </a>
+    
+                            @endif
+                        @endif
+    
+                        @if(Auth::user()->role == 1)
+                            <a href="{{ url('superadmin') }}" class="navbar-item"> Mon Espace </a>
+                            <a href="{{ url('superadmin/finances') }}" class="navbar-item"> Finances </a>
+                            <a href="{{ url('superadmin/users') }}" class="navbar-item"> Liste des utilisateurs </a>
+                            <a href="{{ url('superadmin/programs') }}" class="navbar-item"> Programmes </a>
+                            <a href="{{ url('superadmin/blog') }}" class="navbar-item"> Communauté </a>
+                            <a href="{{ url('superadmin/settings') }}" class="navbar-item"> Paramètres de mon compte </a>
                         @endif
                         <hr class="navbar-divider"/>
                         

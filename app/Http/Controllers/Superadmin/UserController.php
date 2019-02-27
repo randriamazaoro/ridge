@@ -22,6 +22,12 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	    $this->middleware('superadmin');
+	}  
+	
     public function index()
 	{
 		$users = User::paginate(5);

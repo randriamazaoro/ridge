@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class SuperAdmin
+class RedirectAdmin
 {
     /**
      * Handle an incoming request.
@@ -20,8 +20,8 @@ class SuperAdmin
             return redirect('/login');
         }
 
-        elseif (Auth::guard($guard)->user()->role == 1) {
-            return redirect('superadmin');
+        elseif (Auth::guard($guard)->user()->role == 0) {
+            return redirect('/admin');
         }
 
         return $next($request);

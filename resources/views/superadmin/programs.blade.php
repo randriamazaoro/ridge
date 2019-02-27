@@ -66,7 +66,6 @@
 			@slot('gains_per_email') {{ $program->gains_per_email}} @endslot
 			@slot('gains_per_sale') {{ $program->gains_per_sale * 100}} @endslot
 			@slot('social') {{ $program->social }} @endslot
-			@slot('advantages') {{ $program->advantages }} @endslot
         @endcomponent 
 		
 	@endforeach
@@ -200,7 +199,7 @@
                                 <a 
                                     id="delete-faq-url-{{ $faq->id }}"
                                     onclick="deleteModal('faq','{{ $faq->id }}')" 
-                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}"
+                                    data-url="{{ url('superadmin/programs/delete/faq/'.$faq->id) }}"
                                     >
                                     <div class="icon">
                                         <i
@@ -418,7 +417,7 @@
 
 </section>
 
-@include('modals.programs')
+@include('superadmin.partials.programs')
 
 
 @endsection

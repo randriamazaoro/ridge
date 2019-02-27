@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+use App\User;
+use App\Affiliate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -16,9 +18,9 @@ class UserHasCompletedInitiation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +30,11 @@ class UserHasCompletedInitiation extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.user.has-completed-initiation');
+        return $this->markdown('emails.user.has-completed-initiation')
+                    ->subject('Nous vous remerçions de votre achat !')
+                    ->with([
+                        'user' => $this->user,
+                        'affiliate' => Affiliate::find($this->user->id),
+                    ]);
     }
 }

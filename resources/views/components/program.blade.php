@@ -2,7 +2,7 @@
     <div class="tile is-child box">
         <div class="is-perfectly-centered">
             <figure class="image is-128x128">
-                <img src="{{ asset("svg/{$program}.svg")}}" />
+                <img src="{{ asset("svg/".strtolower($program).".svg")}}" />
             </figure>
         </div>
         <br />
@@ -26,7 +26,6 @@
             <br />
             <li><b>Social :</b> {{ $social }}</li>
             <br />
-            <li><b>Avantages :</b> {{ $advantages }}</li>
         </ul>
         <br />
         <div class="is-perfectly-centered"><div>{{ $slot }}</div></div>

@@ -22,6 +22,12 @@ use App\Http\Controllers\Controller;
 
 class FinanceController extends Controller
 {
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	    $this->middleware('superadmin');
+	}  
+
     public function index()
 	{
 		$sales = Sale::paginate(5);

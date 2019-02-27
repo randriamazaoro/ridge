@@ -1,7 +1,7 @@
 @extends('layouts.min.app')
 
 @section('title')
-	 | Dashboard
+	 | {{ $user->first_name }} {{ $user->last_name }}
 @endsection
 
 @section('content')
@@ -170,7 +170,7 @@
         <div class="columns">
             <div class="column is-3 is-perfectly-centered">
                 <figure class="image is-128x128">
-                    <img src="{{ asset('svg/'.$affiliate->program.'.svg') }}" />
+                    <img src="{{ asset('svg/'.strtolower($affiliate->program).'.svg') }}" />
 				</figure>
             </div>
             <div class="column is-4 content">
@@ -191,7 +191,7 @@
                 <p>
                     <b>Lien de référence:</b><br />
                     <a href="{{ url('register?ref='.$affiliate->id) }}">
-						https://ridge.io/register?ref={{$affiliate->id}}
+						{{ config('app.url') }}/register?ref={{$affiliate->id}}
 					</a>
                 </p>
                 <p>

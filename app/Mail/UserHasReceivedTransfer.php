@@ -34,6 +34,7 @@ class UserHasReceivedTransfer extends Mailable
     public function build()
     {
         return $this->markdown('emails.user.has-received-transfer')
+                    ->subject('Votre demande de transfert à été validée !')
                     ->with([
                             'user' => $this->user,
                             'transfer_request' => $this->transfer_request,

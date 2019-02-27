@@ -22,6 +22,12 @@ use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	    $this->middleware('superadmin');
+	}  
+
     public function index()
 	{
 		$posts = Post::paginate(5);

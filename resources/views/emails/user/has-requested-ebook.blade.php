@@ -1,21 +1,12 @@
 @component('mail::message')
 
-<div class="is-perfectly-centered">
-	<figure class="image is-128x128">
-		<img src="{{ asset('svg/mini.svg') }}" />
-	</figure>
+<div class="content">
+	<p><b>Bonjour</b>,</P>
+
+	<p>Vous avez entendu le mot <i>"Affiliation"</i> quelque part, surtout sur Ridge, mais jusque là vous ne savez pas encore ce que cela signifie.</p>
+	<p>Comme un avant goût du monde qui vous attend, nous vous offrons gratuitement un guide qui vous montrera tous ce que vous devez savoir avant de vous lancer.</p>
+	<p>N'oubliez pas d'ouvrir un compte chez nous :)</p>
 </div>
-<br />
-
-<h1 class="title is-4 has-text-primary has-text-centered">
-	Réinitialiser votre mot de passe?
-</h1>
-
-<p class="has-text-justified">
-	Si vous avez demandé à reinitialiser le mot de passe pour votre compte chez
-	nous, cliquez le bouton ci-dessous. Si vous n'avez pas fait cette demande,
-	ignorez cet email.
-</p>
 <br />
 
 @component('mail::button', ['url' => url("newsletter/download/ebook/{$token}") ])

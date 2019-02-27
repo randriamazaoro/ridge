@@ -70,7 +70,6 @@
 						@slot('gains_per_email') {{ $program->gains_per_email}} @endslot
 						@slot('gains_per_sale') {{ $program->gains_per_sale * 100}} @endslot
 						@slot('social') {{ $program->social }} @endslot
-						@slot('advantages') {{ $program->advantages }} @endslot
 
 						<input
 							type="radio"

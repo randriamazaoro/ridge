@@ -2,7 +2,7 @@
 	<div class="columns is-vcentered">
 		<div class="column is-3 is-perfectly-centered">
 			<figure class="image is-128x128">
-				<img src="{{ asset('svg/'.$program.'.svg') }}" />
+				<img src="{{ asset('svg/'.strtolower($program).'.svg') }}" />
 			</figure>
 		</div>
 
@@ -17,7 +17,6 @@
 				<li><b>Rémunération :</b> {{ $remuneration }}.
 				<br/>Dont <b class="has-text-warning">{{ $gains_per_email }}$ </b> par email collecté et <b class="has-text-warning">{{ $gains_per_sale }}%</b> de commission par vente</li>
 				<li><b>Social :</b> {{ $social }}</li>
-				<li><b>Avantages :</b> {{ $advantages }}</li>
 			</ul>
 		</div>
 

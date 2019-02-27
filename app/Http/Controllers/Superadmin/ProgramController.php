@@ -23,6 +23,12 @@ use App\Http\Controllers\Controller;
 
 class ProgramController extends Controller
 {
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	    $this->middleware('superadmin');
+	}   
+
     public function index()
 	{
 		$programs = Program::all();
@@ -76,6 +82,20 @@ class ProgramController extends Controller
     					]);
 	}
 
+	public function destroyTheme($id)
+	{
+		Theme::where('id',$id)
+			->first()
+			->delete();
+
+		return back()->with([
+    					'code' => 'theme-destroyed',
+    					'image' => 'trash',
+    					'title' => 'La theme a bien été supprimé !',
+    					'subtitle' => '',
+    					]);
+	}
+
 	public function storeFaq(Request $request)
 	{
 		Faq::create([
@@ -106,6 +126,20 @@ class ProgramController extends Controller
     					'code' => 'settings-updated',
     					'image' => 'gear',
     					'title' => 'Vos modifications ont bien été enregistrées !',
+    					'subtitle' => '',
+    					]);
+	}
+
+	public function destroyFaq($id)
+	{
+		Faq::where('id',$id)
+			->first()
+			->delete();
+
+		return back()->with([
+    					'code' => 'theme-destroyed',
+    					'image' => 'trash',
+    					'title' => 'L\'information a bien été supprimé !',
     					'subtitle' => '',
     					]);
 	}

@@ -157,7 +157,7 @@ class InitiationController extends Controller {
 		]);
 
 		Mail::to($user->email)
-			->send(new UserHasCompletedInitiation);
+			->send(new UserHasCompletedInitiation($user));
 
 		Mail::to(User::find($referral->id)->email)
 			->send(new UserHasSale($sale, $referral, User::find($referral->id)));

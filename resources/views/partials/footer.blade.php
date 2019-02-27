@@ -1,7 +1,12 @@
+<br />
+<br />
 <hr />
 <footer class="section container">
     <small>
         <div class="columns">
+            <div class="column is-4">
+                <img src="{{ asset('svg/logo.svg') }}" style="height:50px;" />
+            </div>
             <div class="column is-3 content">
                 <p><b>Navigation</b></p>
 
@@ -26,32 +31,26 @@
                 <p><a href="{{ url('/legal/CGV#confidentialité') }}"> Politique de confidentialité </a></p>
             </div>
 
-            <div class="column is-3">
-                <p><b>Nous suivre</b></p>
-                <br />
+            <div class="column is-2 content">
+                <p><b>Mon espace</b></p>
 
-                <span class="icon is-large">
-                    <figure class="image is-32x32">
-                        <img src="{{ asset("svg/social/facebook.svg") }}" />
-                    </figure>
-                </span>
+                <p><a href="{{ url('/login') }}"> Se connecter </a></p>
 
-                <span class="icon is-large">
-                    <figure class="image is-32x32">
-                        <img src="{{ asset("svg/social/twitter.svg") }}" />
-                    </figure>
-                </span>
+                <p><a href="{{ url('/register') }}"> Créer un compte </a></p>
 
-                <span class="icon is-large">
-                    <figure class="image is-32x32">
-                        <img src="{{ asset("svg/social/instagram.svg") }}" />
-                    </figure>
-                </span>
+
             </div>
         </div>
 
-        <div class="has-text-right">
-            © {{ date('Y') }} Copyright - Ridge | Website made by <a href="{{ config('app.editor_url') }}"><b>Randriamazaoro</b></a>
+        <div class="columns is-vcentered">
+            <span class="column has-text-left">© {{ date('Y') }} Copyright - Ridge | Website made by <a href="{{ config('app.editor_url') }}"><b>Randriamazaoro</b></a></span>
+            <span class="column has-text-right">
+                <a href="https://www.facebook.com/Ridgeofficiel" target="_blank" class="icon is-medium">
+                    <figure class="image is-32x32">
+                        <img src="{{ asset("svg/social/facebook.svg") }}" />
+                    </figure>
+                </a>
+            </a>
         </div>
     </small>
 </footer>

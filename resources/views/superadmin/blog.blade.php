@@ -231,7 +231,7 @@
     </div>
 </section>
 
-@include('modals.blog')
+@include('superadmin.partials.blog')
 
 
 @endsection

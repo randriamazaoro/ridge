@@ -37,11 +37,11 @@ class CreateUsersTable extends Migration
         });
 
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'name' => 'Superadmin',
             'affiliate_id' => 1,
-            'email' => 'patrick@gmail.com',
-            'paypal_address' => 'patrick@gmail.com',
-            'password' => Hash::make('admin:patrick'),
+            'email' => 'zekemahery@gmail.com',
+            'paypal_address' => 'zekemahery@gmail.com',
+            'password' => Hash::make('Azerty012'),
             'role' => 1,
             'status' => 'Actif',
             'ip_address' => request()->ip(),
