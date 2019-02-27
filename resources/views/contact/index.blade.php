@@ -21,15 +21,11 @@
 		<div class="column is-4">
 			<!-- TEXT -->
 			<div class="content">
+				<h1 class="title has-text-primary">Envoyer un mail</h1>
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-					sed do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					Vous avez des questions ? Vous souhaitez avoir beaucoup plus d'informations ?<br/>
+					Envoyez-nous un email et nous allons vous contacter le plus vite possible.
 				</p>
-				<p><b>+1-800-621-1429</b></p>
-				<p><b>info@aclotech.com</b></p>
-				<p><b>244 Fifth Avenue, New York</b></p>
 			</div>
 		</div>
 		<!-- RIGHT IMAGE -->
