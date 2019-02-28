@@ -6,24 +6,27 @@ use App\Affiliate;
 use App\Invoice;
 use App\Program;
 use Illuminate\Http\Request;
+use PayPal\Api\Amount;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PaypalController extends Controller
 {
 
-    protected $provider;
+    private $_api_context;
 
     public function __construct()
     {
-
-        /** PayPal api context **/
-        $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
-            $paypal_conf['client_id'],
-            $paypal_conf['secret'])
-        );
-        $this->_api_context->setConfig($paypal_conf['settings']);
-
+        // setup PayPal api context
+        $this->_api_context = new ApiContext(new OAuthTokenCredential(config('paypal.client_id'), config('paypal.secret')));
+        $this->_api_context->setConfig(config('paypal.settings'));
     }
 
     public function payWithpaypal(Request $request)
@@ -32,7 +35,7 @@ class PaypalController extends Controller
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
-        $item_1 = new Item();
+        $item = new Item();
 
         if (session('transaction_type') == "initiation") {
 
@@ -56,8 +59,8 @@ class PaypalController extends Controller
                 ->setDescription('Initiation de votre programme Ridge sur le Pack ' . $program->name);
 
             $redirect_urls = new RedirectUrls();
-            $redirect_urls->setReturnUrl(URL::route('/admin/initiation/store')) /** Specify return URL **/
-                ->setCancelUrl(URL::route('/admin/initiation/summary'));
+            $redirect_urls->setReturnUrl(url('/admin/initiation/store')) /** Specify return URL **/
+                ->setCancelUrl(url('/admin/initiation/summary'));
 
         }
 
@@ -94,51 +97,76 @@ class PaypalController extends Controller
             ->setPayer($payer)
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
-        /** dd($payment->create($this->_api_context));exit; **/
+
         try {
-
             $payment->create($this->_api_context);
-
         } catch (\PayPal\Exception\PPConnectionException $ex) {
-
             if (\Config::get('app.debug')) {
-
-                \Session::put('error', 'Connection timeout');
-                return Redirect::route('initiation/summary');
-
+                echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                $err_data = json_decode($ex->getData(), true);
+                exit;
             } else {
-
-                \Session::put('error', 'Some error occur, sorry for inconvenient');
-                return Redirect::route('initiation/summary');
-
+                die('Some error occur, sorry for inconvenient');
             }
-
         }
 
         foreach ($payment->getLinks() as $link) {
-
             if ($link->getRel() == 'approval_url') {
-
                 $redirect_url = $link->getHref();
                 break;
-
             }
-
         }
 
-        /** add payment ID to session **/
+        // add payment ID to session
         Session::put('paypal_payment_id', $payment->getId());
 
         if (isset($redirect_url)) {
-
-            /** redirect to paypal **/
+            // redirect to paypal
             return Redirect::away($redirect_url);
-
         }
 
-        \Session::put('error', 'Unknown error occurred');
-        return Redirect::route('paywithpaypal');
+        returnredirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
 
+    }
+
+    public function getPaymentStatus()
+    {
+        // Get the payment ID before session clear
+        $payment_id = Session::get('paypal_payment_id');
+
+        // clear the session payment ID
+        Session::forget('paypal_payment_id');
+
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
+        }
+
+        $payment = Payment::get($payment_id, $this->_api_context);
+
+        // PaymentExecution object includes information necessary
+        // to execute a PayPal account payment.
+        // The payer_id is added to the request query parameters
+        // when the user is redirected from paypal back to your site
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+
+        //Execute the payment
+        $result = $payment->execute($execution, $this->_api_context);
+
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';exit; // DEBUG RESULT, remove it later
+
+        if ($result->getState() == 'approved') { // payment made
+            if (session('transaction_type') == "initiation") {
+                return redirect()->action('Admin\InitiationController@store');
+            }
+
+            if (session('transaction_type') == "upgrade") {
+                return redirect()->action('Admin\UpgradeController@store');
+            }
+        }
+        return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
     }
 
     public function expressCheckout(Request $request)
