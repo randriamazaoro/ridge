@@ -4,59 +4,180 @@ namespace App\Http\Controllers;
 
 use App\Affiliate;
 use App\Invoice;
-use App\OwnedTheme;
 use App\Program;
-use App\Sale;
-use App\Theme;
-use App\User;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PaypalController extends Controller
 {
 
-	protected $provider;
+    protected $provider;
 
-	public function __construct() {
-    	$this->provider = new ExpressCheckout();
-	}
+    public function __construct()
+    {
 
-	public function expressCheckout(Request $request) {
+        /** PayPal api context **/
+        $paypal_conf = \Config::get('paypal');
+        $this->_api_context = new ApiContext(new OAuthTokenCredential(
+            $paypal_conf['client_id'],
+            $paypal_conf['secret'])
+        );
+        $this->_api_context->setConfig($paypal_conf['settings']);
 
-		// get new invoice id
-		$invoice_id = Invoice::count() + 1;
-      
-		// Get the cart data
-		$cart = $this->getCart($invoice_id);
+    }
 
-		// create new invoice
-		$invoice = new Invoice();
-		$invoice->title = $cart['invoice_description'];
-		$invoice->price = $cart['total'];
-		$invoice->save();
+    public function payWithpaypal(Request $request)
+    {
 
-		// send a request to paypal 
-		// paypal should respond with an array of data
-		// the array should contain a link to paypal's payment system
-		$response = $this->provider->setExpressCheckout($cart);
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
 
-		// if there is no link redirect back with error message
-		if (!$response['paypal_link']) {
-    		return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
-    		// For the actual error message dump out $response and see what's in there
-  		}
+        $item_1 = new Item();
 
-		// redirect to paypal
-		// after payment is done paypal
-		// will redirect us back to $this->expressCheckoutSuccess
-		return redirect($response['paypal_link']);
-	}
+        if (session('transaction_type') == "initiation") {
 
-	private function getCart($invoice_id)
+            $program = Program::where('name', session('program'))->first();
+
+            $item->setName('Pack ' . $program->name) /** item name **/
+                ->setCurrency('EUR')
+                ->setQuantity(1)
+                ->setPrice($program->price); /** unit price **/
+
+            $item_list = new ItemList();
+            $item_list->setItems(array($item));
+
+            $amount = new Amount();
+            $amount->setCurrency('EUR')
+                ->setTotal($program->price);
+
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($item_list)
+                ->setDescription('Initiation de votre programme Ridge sur le Pack ' . $program->name);
+
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::route('/admin/initiation/store')) /** Specify return URL **/
+                ->setCancelUrl(URL::route('/admin/initiation/summary'));
+
+        }
+
+        if (session('transaction_type') == "upgrade") {
+
+            $affiliate = Affiliate::find(Auth::id());
+            $program = Program::where('name', session('program'))->first();
+            $affiliate_program = Program::where('name', $affiliate->program)->first();
+
+            $item->setName('Pack ' . $program->name) /** item name **/
+                ->setCurrency('EUR')
+                ->setQuantity(1)
+                ->setPrice($program->price - $affiliate_program->price); /** unit price **/
+
+            $item_list = new ItemList();
+            $item_list->setItems(array($item));
+
+            $amount = new Amount();
+            $amount->setCurrency('EUR')
+                ->setTotal($program->price - $affiliate_program->price);
+
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($item_list)
+                ->setDescription('Mise à niveau de votre programme Ridge sur le Pack ' . $program->name);
+
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::route('/admin/upgrade/store')) /** Specify return URL **/
+                ->setCancelUrl(URL::route('/admin/settings/upgrade/summary'));
+        }
+
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+        /** dd($payment->create($this->_api_context));exit; **/
+        try {
+
+            $payment->create($this->_api_context);
+
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+
+            if (\Config::get('app.debug')) {
+
+                \Session::put('error', 'Connection timeout');
+                return Redirect::route('initiation/summary');
+
+            } else {
+
+                \Session::put('error', 'Some error occur, sorry for inconvenient');
+                return Redirect::route('initiation/summary');
+
+            }
+
+        }
+
+        foreach ($payment->getLinks() as $link) {
+
+            if ($link->getRel() == 'approval_url') {
+
+                $redirect_url = $link->getHref();
+                break;
+
+            }
+
+        }
+
+        /** add payment ID to session **/
+        Session::put('paypal_payment_id', $payment->getId());
+
+        if (isset($redirect_url)) {
+
+            /** redirect to paypal **/
+            return Redirect::away($redirect_url);
+
+        }
+
+        \Session::put('error', 'Unknown error occurred');
+        return Redirect::route('paywithpaypal');
+
+    }
+
+    public function expressCheckout(Request $request)
+    {
+
+        // get new invoice id
+        $invoice_id = Invoice::count() + 1;
+
+        // Get the cart data
+        $cart = $this->getCart($invoice_id);
+
+        // create new invoice
+        $invoice = new Invoice();
+        $invoice->title = $cart['invoice_description'];
+        $invoice->price = $cart['total'];
+        $invoice->save();
+
+        // send a request to paypal
+        // paypal should respond with an array of data
+        // the array should contain a link to paypal's payment system
+        $response = $this->provider->setExpressCheckout($cart);
+
+        // if there is no link redirect back with error message
+        if (!$response['paypal_link']) {
+            return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
+            // For the actual error message dump out $response and see what's in there
+        }
+
+        // redirect to paypal
+        // after payment is done paypal
+        // will redirect us back to $this->expressCheckoutSuccess
+        return redirect($response['paypal_link']);
+    }
+
+    private function getCart($invoice_id)
     {
         if (session('transaction_type') == "initiation") {
 
-            $program = Program::where('name',session('program'))->first();
+            $program = Program::where('name', session('program'))->first();
 
             return [
                 // if payment is not recurring cart can have many items
@@ -74,18 +195,18 @@ class PaypalController extends Controller
                 'return_url' => url('/paypal/express-checkout-success'),
                 // every invoice id must be unique, else you'll get an error from paypal
                 'invoice_id' => $invoice_id,
-                'invoice_description' => "Initiation / Pack " . $program->name ." #" . $invoice_id ,
+                'invoice_description' => "Initiation / Pack " . $program->name . " #" . $invoice_id,
                 'cancel_url' => url('admin/initiation'),
-            
+
                 'total' => $program->price,
             ];
         }
 
         if (session('transaction_type') == "upgrade") {
-            
+
             $affiliate = Affiliate::find(Auth::id());
-            $program = Program::where('name',session('program'))->first();
-            $affiliate_program = Program::where('name',$affiliate->program)->first();
+            $program = Program::where('name', session('program'))->first();
+            $affiliate_program = Program::where('name', $affiliate->program)->first();
 
             return [
                 // if payment is not recurring cart can have many items
@@ -103,15 +224,16 @@ class PaypalController extends Controller
                 'return_url' => url('/paypal/express-checkout-success'),
                 // every invoice id must be unique, else you'll get an error from paypal
                 'invoice_id' => $invoice_id,
-                'invoice_description' => "Upgrade / Pack " . $program->name ." #" . $invoice_id ,
+                'invoice_description' => "Upgrade / Pack " . $program->name . " #" . $invoice_id,
                 'cancel_url' => url('admin/settings/upgrade'),
-            
+
                 'total' => $program->price - $affiliate_program->price,
             ];
         }
     }
 
-   	public function expressCheckoutSuccess(Request $request) {
+    public function expressCheckoutSuccess(Request $request)
+    {
 
         // check if payment is recurring
         $recurring = $request->input('recurring', false) ? true : false;
@@ -141,12 +263,10 @@ class PaypalController extends Controller
         // get cart data
         $cart = $this->getCart($recurring, $invoice_id);
 
-
         // if payment is not recurring just perform transaction on PayPal
         // and get the payment status
         $payment_status = $this->provider->doExpressCheckoutPayment($cart, $token, $PayerID);
         $status = $payment_status['PAYMENTINFO_0_PAYMENTSTATUS'];
-
 
         // find invoice by id
         $invoice = Invoice::find($invoice_id);
@@ -166,11 +286,11 @@ class PaypalController extends Controller
                 return redirect()->action('Admin\InitiationController@store');
             }
 
-            if (session('transaction_type') == "upgrade"){
+            if (session('transaction_type') == "upgrade") {
                 return redirect()->action('Admin\UpgradeController@store');
             }
         }
-        
+
         return redirect('admin/initiation')->with(['code' => 'danger', 'message' => 'Il y a eu une erreur lors du payement !']);
     }
 }

@@ -1,5 +1,3 @@
-<br />
-<br />
 <hr />
 <footer class="section container">
     <small>

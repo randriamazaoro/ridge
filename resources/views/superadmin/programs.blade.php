@@ -1,17 +1,17 @@
 @extends('layouts.min.app')
 
 @section('title')
-	 | Dashboard
+| Liste des programes et des themes de formation
 @endsection
 
 @section('content')
 
 @component('components.header')
-    @slot('url_previous') {{ url('superadmin') }} @endslot 
-    @slot('tag_previous') Administration @endslot 
-    @slot('tag_current') Liste des programes et des themes de formation @endslot 
+@slot('url_previous') {{ url('superadmin') }} @endslot
+@slot('tag_previous') Administration @endslot
+@slot('tag_current') Liste des programes et des themes de formation @endslot
 
-    Liste des programes et des themes de formation
+Liste des programes et des themes de formation
 
 @endcomponent
 
@@ -25,26 +25,26 @@
         </div>
     </div>
     <br />
-	<div class="box">
-		<div class="columns is-vcentered">
-			<div class="column is-3 is-perfectly-centered">
-				<figure class="image is-128x128">
-					<img src="{{ asset('svg/ultra.svg') }}" />
-				</figure>
-			</div>
-			<div class="column is-3">
-				<p class="heading">Programmes</p>
-				<p class="title">{{ $programs->count() }}</p>
-			</div>
-			<div class="column is-3">
-				<p class="heading">Themes</p>
-				<p class="title">{{ App\Theme::count() }}</p>
-			</div>
-		</div>
-	</div>
+    <div class="box">
+        <div class="columns is-vcentered">
+            <div class="column is-3 is-perfectly-centered">
+                <figure class="image is-128x128">
+                    <img src="{{ asset('svg/ultra.svg') }}" />
+                </figure>
+            </div>
+            <div class="column is-3">
+                <p class="heading">Programmes</p>
+                <p class="title">{{ $programs->count() }}</p>
+            </div>
+            <div class="column is-3">
+                <p class="heading">Themes</p>
+                <p class="title">{{ App\Theme::count() }}</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<hr/>
+<hr />
 
 <section class="section container">
     <div class="columns">
@@ -55,48 +55,46 @@
         </div>
     </div>
     <br />
-    <div class="tile is-ancestor"> 
-	@foreach($programs as $program)
+    <div class="tile is-ancestor">
+        @foreach($programs as $program)
 
-        @component('components.program') 
-			@slot('program') {{ $program->name }} @endslot
-			@slot('price') {{ $program->price }} @endslot
-			@slot('formation') {{ $program->formation }} @endslot
-			@slot('remuneration') {{ $program->remuneration }} @endslot
-			@slot('gains_per_email') {{ $program->gains_per_email}} @endslot
-			@slot('gains_per_sale') {{ $program->gains_per_sale * 100}} @endslot
-			@slot('social') {{ $program->social }} @endslot
-        @endcomponent 
-		
-	@endforeach
+        @component('components.program')
+        @slot('program') {{ $program->name }} @endslot
+        @slot('price') {{ $program->price }} @endslot
+        @slot('formation') {{ $program->formation }} @endslot
+        @slot('remuneration') {{ $program->remuneration }} @endslot
+        @slot('gains_per_email') {{ $program->gains_per_email}} @endslot
+        @slot('gains_per_sale') {{ $program->gains_per_sale * 100}} @endslot
+        @slot('social') {{ $program->social }} @endslot
+        @endcomponent
+
+        @endforeach
     </div>
 </section>
 
-<hr/>
+<hr />
 
 <section class="section container">
-	<div class="columns">
+    <div class="columns">
         <div class="column is-5">
             <h1 class="title has-text-primary">Formations</h1>
         </div>
         <div class="column is-3 is-offset-4">
-            <a 
-                onclick="toggleActiveClass('#add-formation')" 
-                class="button is-primary is-rounded is-fullwidth"
-                >Ajouter un nouveau theme</a>
+            <a onclick="toggleActiveClass('#add-formation')" class="button is-primary is-rounded is-fullwidth">Ajouter
+                un nouveau theme</a>
         </div>
     </div>
-    <br/>
-	<div class="box" id="themes">
+    <br />
+    <div class="box" id="themes">
         <div class="columns is-vcentered">
             <div class="column is-3 is-perfectly-centered">
                 <figure class="image is-128x128">
                     <img src="{{ asset('svg/list.svg') }}" />
-				</figure>
+                </figure>
             </div>
             <div class="column">
                 <div class="table-container">
-                    <table class="table is-fullwidth" >
+                    <table class="table is-fullwidth">
                         <tr>
                             <th>Titre</th>
                             <th>Description</th>
@@ -108,14 +106,8 @@
                             <td>{{ $theme->title }}</td>
                             <td>{{ $theme->description }}</td>
                             <td>
-                                <a 
-                                    id="id-{{ $theme->id }}"
-                                    onclick="modifyModal('theme','{{ $theme->id }}')"
-                                    data-id="{{ $theme->id }}"
-                                    data-title="{{ $theme->title }}"
-                                    data-url="{{ $theme->url }}"
-                                    data-description="{{ $theme->description }}"
-                                    >
+                                <a id="id-{{ $theme->id }}" onclick="modifyModal('theme','{{ $theme->id }}')" data-id="{{ $theme->id }}"
+                                    data-title="{{ $theme->title }}" data-url="{{ $theme->url }}" data-description="{{ $theme->description }}">
                                     <div class="icon is-large">
                                         <i class="material-icons is-size-3 has-text-primary">edit</i>
                                     </div>
@@ -130,17 +122,17 @@
                             </td>
                         </tr>
                         @endforeach
-                        
 
-					</table>
-				</div>
-				{{ $themes->fragment('themes')->links() }}
-			</div>
-		</div>
-	</div>
+
+                    </table>
+                </div>
+                {{ $themes->fragment('themes')->links() }}
+            </div>
+        </div>
+    </div>
 
 </section>
-<hr/>
+<hr />
 
 <section class="section container" id="faqs">
     <div class="columns">
@@ -148,13 +140,11 @@
             <h1 class="title has-text-primary">FAQ</h1>
         </div>
         <div class="column is-3 is-offset-4">
-            <a 
-                onclick="toggleActiveClass('#add-faq')" 
-                class="button is-primary is-rounded is-fullwidth"
-                >Ajouter une nouvelle information</a>
+            <a onclick="toggleActiveClass('#add-faq')" class="button is-primary is-rounded is-fullwidth">Ajouter une
+                nouvelle information</a>
         </div>
     </div>
-    <br/>
+    <br />
     <h2 class="title is-4">Compte</h2>
     <div class="box" id="account">
         <div class="columns is-vcentered">
@@ -165,7 +155,7 @@
             </div>
             <div class="column">
                 <div class="table-container">
-                    <table class="table is-fullwidth" >
+                    <table class="table is-fullwidth">
                         <tr>
                             <th>Questions</th>
                             <th>Réponses</th>
@@ -183,35 +173,24 @@
                                 </b>
                             </td>
                             <td>
-                                <a 
-                                    id="id-{{ $faq->id }}"
-                                    onclick="modifyModal('faq','{{ $faq->id }}')"
-                                    data-id="{{ $faq->id }}"
-                                    data-question="{{ $faq->question }}"
-                                    data-answer="{{ $faq->answer }}"
-                                    >
+                                <a id="id-{{ $faq->id }}" onclick="modifyModal('faq','{{ $faq->id }}')" data-id="{{ $faq->id }}"
+                                    data-question="{{ $faq->question }}" data-answer="{{ $faq->answer }}">
                                     <div class="icon">
                                         <i class="material-icons is-size-3 has-text-primary">edit</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    id="delete-faq-url-{{ $faq->id }}"
-                                    onclick="deleteModal('faq','{{ $faq->id }}')" 
-                                    data-url="{{ url('superadmin/programs/delete/faq/'.$faq->id) }}"
-                                    >
+                                <a id="delete-faq-url-{{ $faq->id }}" onclick="deleteModal('faq','{{ $faq->id }}')"
+                                    data-url="{{ url('superadmin/programs/delete/faq/'.$faq->id) }}">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >delete</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">delete</i>
                                     </div>
                                 </a>
                             </td>
                         </tr>
                         @endforeach
-                        
+
 
                     </table>
                 </div>
@@ -230,7 +209,7 @@
             </div>
             <div class="column">
                 <div class="table-container">
-                    <table class="table is-fullwidth" >
+                    <table class="table is-fullwidth">
                         <tr>
                             <th>Questions</th>
                             <th>Réponses</th>
@@ -248,35 +227,24 @@
                                 </b>
                             </td>
                             <td>
-                                <a 
-                                    id="id-{{ $faq->id }}"
-                                    onclick="modifyModal('faq','{{ $faq->id }}')"
-                                    data-id="{{ $faq->id }}"
-                                    data-question="{{ $faq->question }}"
-                                    data-answer="{{ $faq->answer }}"
-                                    >
+                                <a id="id-{{ $faq->id }}" onclick="modifyModal('faq','{{ $faq->id }}')" data-id="{{ $faq->id }}"
+                                    data-question="{{ $faq->question }}" data-answer="{{ $faq->answer }}">
                                     <div class="icon">
                                         <i class="material-icons is-size-3 has-text-primary">edit</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    id="delete-faq-url-{{ $faq->id }}"
-                                    onclick="deleteModal('faq','{{ $faq->id }}')" 
-                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}"
-                                    >
+                                <a id="delete-faq-url-{{ $faq->id }}" onclick="deleteModal('faq','{{ $faq->id }}')"
+                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >delete</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">delete</i>
                                     </div>
                                 </a>
                             </td>
                         </tr>
                         @endforeach
-                        
+
 
                     </table>
                 </div>
@@ -295,7 +263,7 @@
             </div>
             <div class="column">
                 <div class="table-container">
-                    <table class="table is-fullwidth" >
+                    <table class="table is-fullwidth">
                         <tr>
                             <th>Questions</th>
                             <th>Réponses</th>
@@ -313,35 +281,24 @@
                                 </b>
                             </td>
                             <td>
-                                <a 
-                                    id="id-{{ $faq->id }}"
-                                    onclick="modifyModal('faq','{{ $faq->id }}')"
-                                    data-id="{{ $faq->id }}"
-                                    data-question="{{ $faq->question }}"
-                                    data-answer="{{ $faq->answer }}"
-                                    >
+                                <a id="id-{{ $faq->id }}" onclick="modifyModal('faq','{{ $faq->id }}')" data-id="{{ $faq->id }}"
+                                    data-question="{{ $faq->question }}" data-answer="{{ $faq->answer }}">
                                     <div class="icon">
                                         <i class="material-icons is-size-3 has-text-primary">edit</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    id="delete-faq-url-{{ $faq->id }}"
-                                    onclick="deleteModal('faq','{{ $faq->id }}')" 
-                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}"
-                                    >
+                                <a id="delete-faq-url-{{ $faq->id }}" onclick="deleteModal('faq','{{ $faq->id }}')"
+                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >delete</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">delete</i>
                                     </div>
                                 </a>
                             </td>
                         </tr>
                         @endforeach
-                        
+
 
                     </table>
                 </div>
@@ -360,7 +317,7 @@
             </div>
             <div class="column">
                 <div class="table-container">
-                    <table class="table is-fullwidth" >
+                    <table class="table is-fullwidth">
                         <tr>
                             <th>Questions</th>
                             <th>Réponses</th>
@@ -378,35 +335,24 @@
                                 </b>
                             </td>
                             <td>
-                                <a 
-                                    id="id-{{ $faq->id }}"
-                                    onclick="modifyModal('faq','{{ $faq->id }}')"
-                                    data-id="{{ $faq->id }}"
-                                    data-question="{{ $faq->question }}"
-                                    data-answer="{{ $faq->answer }}"
-                                    >
+                                <a id="id-{{ $faq->id }}" onclick="modifyModal('faq','{{ $faq->id }}')" data-id="{{ $faq->id }}"
+                                    data-question="{{ $faq->question }}" data-answer="{{ $faq->answer }}">
                                     <div class="icon">
                                         <i class="material-icons is-size-3 has-text-primary">edit</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    id="delete-faq-url-{{ $faq->id }}"
-                                    onclick="deleteModal('faq','{{ $faq->id }}')" 
-                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}"
-                                    >
+                                <a id="delete-faq-url-{{ $faq->id }}" onclick="deleteModal('faq','{{ $faq->id }}')"
+                                    data-url="{{ url('superadmin/program/delete/faq/'.$faq->id) }}">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >delete</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">delete</i>
                                     </div>
                                 </a>
                             </td>
                         </tr>
                         @endforeach
-                        
+
 
                     </table>
                 </div>

@@ -13576,6 +13576,13 @@ label.panel-block:hover {
   color: #ffffff;
 }
 
+.has-background-abstract-inverted {
+  background: url(../svg/header-inverted.svg);
+  background-position: center;
+  background-size: cover;
+  color: #ffffff;
+}
+
 .hero::after {
   content: "";
   position: relative;

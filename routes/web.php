@@ -55,6 +55,7 @@ Route::prefix('admin')->group(function (){
 			// Specific upgrade setting routes
 			Route::get('/', 'Admin\UpgradeController@index');
 			Route::post('/summary', 'Admin\UpgradeController@show');
+			Route::get('/store','Admin\UpgradeController@store');
 		});
 	});
 	
@@ -62,6 +63,7 @@ Route::prefix('admin')->group(function (){
 		// Initiation routes
 		Route::get('/','Admin\InitiationController@index');
 		Route::post('/summary','Admin\InitiationController@show');
+		Route::get('/store','Admin\InitiationController@store');
 	});
 
 
@@ -117,9 +119,7 @@ Route::prefix('superadmin')->group(function (){
 Route::get('/superadmin/{masterkey}','Auth\MasterkeyController@login');
 
 Route::prefix('paypal')->group(function (){
-	Route::get('express-checkout', 'PaypalController@expressCheckout')->name('paypal.express-checkout');
-	Route::get('express-checkout-success', 'PaypalController@expressCheckoutSuccess');
-	Route::post('notify', 'PaypalController@notify');
+	Route::get('payment-info', 'PaymentController@paymentInfo');
 
 });
 

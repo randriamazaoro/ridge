@@ -2,6 +2,16 @@ function toggleActiveClass(target){
 	$(target).toggleClass('is-active');
 }
 
+function showMenu(section, scrolled, animation) {
+	if (
+		document.body.scrollTop > scrolled ||
+		document.documentElement.scrollTop > scrolled
+	) {
+		$(section).addClass(animation);
+		$(section).removeClass("is-invisible");
+	}
+}
+
 function showProgramThemes() {
 
 		

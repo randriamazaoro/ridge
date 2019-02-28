@@ -1,8 +1,8 @@
 @include('partials.navigation-positionned', ['color' => 'is-dark'])
-<section class="hero has-background-abstract">
+<section class="hero has-background-abstract is-clipped">
 	<div class="hero-body">
 		<div class="columns">
-			<div class="column is-10 is-offset-1 has-text-left">
+			<div class="column is-10 is-offset-1 has-text-left animated fadeInUp delay-1s">
 				<br/>
 				<p class="tags">
 					<a href="{{ $url_previous }}">

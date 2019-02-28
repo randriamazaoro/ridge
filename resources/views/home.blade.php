@@ -7,7 +7,7 @@
 <header class="hero has-background-abstract">
     <!-- TEXT -->
     <div class="hero-body is-block">
-        <br/>
+        <br />
         <div class="columns is-vcentered is-centered">
             <div class="column is-5">
                 <p class="title is-2">
@@ -19,7 +19,7 @@
             </div>
 
             <div class="column is-4 is-offset-1">
-                <div class="box animated bounceIn">
+                <div class="box animated fadeInUp fast delay-1s">
                     <div class="is-perfectly-centered">
                         <figure class="image is-128x128">
                             <img src="{{ asset('svg/mini.svg') }}" />
@@ -39,17 +39,9 @@
 
                         <div class="field">
                             <div class="control">
-                                <label for="email" class="label"
-                                    >Votre adresse e-mail</label
-                                >
-                                <input
-                                    id="email"
-                                    type="email"
-                                    class="input is-rounded {{ $errors->has('email') ? ' is-danger' : '' }}"
-                                    name="email"
-                                    value=""
-                                    required
-                                />
+                                <label for="email" class="label">Votre adresse e-mail</label>
+                                <input id="email" type="email" class="input is-rounded {{ $errors->has('email') ? ' is-danger' : '' }}"
+                                    name="email" value="" required />
 
                                 @if ($errors->has('email'))
                                 <span class="has-text-danger" role="alert">
@@ -63,10 +55,7 @@
 
                         <div class="field">
                             <div class="control">
-                                <button
-                                    type="submit"
-                                    class="button is-rounded is-primary is-fullwidth"
-                                >
+                                <button type="submit" class="button is-rounded is-primary is-fullwidth">
                                     Recevoir l'ebook
                                 </button>
                             </div>
@@ -83,8 +72,7 @@
 <!-- HOW IT WORKS -->
 <section class="section is-medium">
     <p class="has-text-centered">
-        <span class="title is-2 has-text-primary">Qu'est-ce que Ridge ?</span
-        ><br />
+        <span class="title is-2 has-text-primary">Qu'est-ce que Ridge ?</span><br />
         <span class="subtitle">Et que faisons-nous ?</span>
     </p>
     <br />
@@ -114,7 +102,7 @@
 
         <!-- IMAGE LEFT -->
         <div class="column is-3 is-offset-1 is-perfectly-centered">
-            <figure class="image is-300x300">
+            <figure class="image is-300x300 is-invisible animated fast" id="section-1">
                 <img src="{{ asset('svg/blueprint.svg') }}" />
             </figure>
         </div>
@@ -143,10 +131,10 @@
     </div>
 </section>
 
-<section class="section is-medium has-background-primary has-text-white">
+<section class="section is-medium has-background-abstract-inverted has-text-white">
     <div class="columns is-centered">
         <div class="column is-3 is-perfectly-centered">
-            <figure class="image is-300x300">
+            <figure class="image is-300x300 is-invisible animated fast" id="section-2">
                 <img src="{{ asset('svg/globalization.svg') }}" />
             </figure>
         </div>
@@ -162,9 +150,7 @@
                 ce dernier n'est pas supportée
             </p>
             <br />
-            <a href="{{ url('contact') }}" class="button is-primary is-inverted is-rounded"
-                >En savoir plus...</a
-            >
+            <a href="{{ url('contact') }}" class="button is-primary is-inverted is-rounded">En savoir plus...</a>
         </div>
     </div>
 </section>
@@ -181,14 +167,12 @@
     <!-- FIRST ROW -->
     <div class="columns is-centered">
         <div class="column is-9">
-            <div class="tile is-ancestor">
+            <div class="tile is-ancestor is-invisible animated fast" id="section-3">
                 <div class="tile is-parent">
                     <div class="tile is-child box has-text-centered">
                         <div class="is-perfectly-centered">
                             <figure class="image is-128x128">
-                                <img
-                                    src="{{ asset('svg/shopping-basket.svg')}}"
-                                />
+                                <img src="{{ asset('svg/shopping-basket.svg')}}" />
                             </figure>
                         </div>
                         <br />
@@ -225,7 +209,7 @@
 </section>
 <!-- DESCRIPTION -->
 
-<section class="section is-medium has-background-primary">
+<section class="section is-medium has-background-abstract">
     <div class="columns is-centered">
         <div class="column is-6 has-text-white">
             <h1 class="title is-2 has-text-centered">
@@ -234,7 +218,7 @@
             <p class="is-size-5-desktop has-text-centered">
                 Pour commencer, vous devez choisir un programme parmi ceux listé
                 ci-dessous. Vous aurez accès à <b>un ou plusieurs thèmes de
-                formation</b> de votre choix (pour apprendre), et également accès à
+                    formation</b> de votre choix (pour apprendre), et également accès à
                 notre <b>programme de rémunération</b> (pour gagner de l'argent)
             </p>
         </div>
@@ -242,47 +226,18 @@
     <br />
 
     <div class="columns is-centered">
-        <div class="column is-11">
-            <div class="tile is-ancestor">
+        <div class="column is-10">
+            <div class="is-invisible animated fast" id="section-4">
                 @foreach(App\Program::all() as $program)
-                <div class="tile is-parent">
-                    <div class="tile is-child box">
-                        <div class="is-perfectly-centered">
-                            <figure class="image is-128x128">
-                                <img src="{{
-                                asset("svg/".strtolower($program->name).".svg")}}" />
-                            </figure>
-                        </div>
-                        <br />
-
-                        <p class="title is-4 has-text-centered">
-                            <span class="tag is-success is-rounded is-size-6"
-                                >{{ $program->price }} €</span
-                            ><br />
-                            Pack {{ $program->name }}
-                        </p>
-                        <ul>
-                            <li>
-                                <b>Formation :</b> {{ $program->formation }}
-                            </li>
-                            <br />
-                            <li>
-                                <b>Rémunération :</b> {{ $program->remuneration
-                                }}. <br />Dont
-                                <b class="has-text-warning"
-                                    >{{ $program->gains_per_email }}€
-                                </b>
-                                par email collecté et
-                                <b class="has-text-warning"
-                                    >{{ $program->gains_per_sale * 100 }}%</b
-                                >
-                                de commission par vente
-                            </li>
-                            <br />
-                            <li><b>Social :</b> {{ $program->social }}</li>
-                        </ul>
-                    </div>
-                </div>
+                @component('components.program-min')
+                @slot('program') {{ $program->name }} @endslot
+                @slot('price') {{ $program->price }} @endslot
+                @slot('formation') {{ $program->formation }} @endslot
+                @slot('remuneration') {{ $program->remuneration }} @endslot
+                @slot('gains_per_email') {{ $program->gains_per_email }} @endslot
+                @slot('gains_per_sale') {{ $program->gains_per_sale * 100 }} @endslot
+                @slot('social') {{ $program->social }} @endslot
+                @endcomponent
                 @endforeach
             </div>
         </div>
@@ -294,11 +249,11 @@
         <div class="column is-5">
             <h1 class="title is-2 has-text-primary">Vous avez des doutes ?</h1>
             <h2 class="subtitle">Vous pouvez lire notre FAQ pour plus de détails</h2>
-            <br/>
+            <br />
             @foreach(App\Faq::all()->take(2) as $faq)
             <div class="box">
                 <p>
-                    <b>{{ $faq->question }}</b><br/>
+                    <b>{{ $faq->question }}</b><br />
                     {{ $faq->answer }}
                 </p>
             </div>
@@ -306,25 +261,28 @@
 
             <div class="field">
                 <div class="control">
-                    <a 
-                        href="{{ url('docs') }}"
-                        class="button is-primary is-rounded"
-                        >Voir plus d'informations...</a>
+                    <a href="{{ url('docs') }}" class="button is-primary is-rounded">Voir plus d'informations...</a>
                 </div>
             </div>
         </div>
 
         <div class="column is-3 is-offset-1 is-perfectly-centered">
-            <figure class="image is-300x300">
+            <figure class="image is-300x300 is-invisible animated fast" id="section-5">
                 <img src="{{ asset('svg/brainstorming.svg') }}" />
             </figure>
         </div>
     </div>
 </section>
+@endsection
 
-
-
-
-
-
+@section('scripts')
+<script type="text/javascript">
+    window.onscroll = function () {
+            showMenu('#section-1', 700, 'bounceIn');
+            showMenu('#section-2', 1300, 'bounceIn');
+            showMenu('#section-3', 1900, 'fadeInUp');
+            showMenu('#section-4', 2600, 'fadeInUp');
+            showMenu('#section-5', 4000, 'bounceIn');
+    }
+</script>
 @endsection

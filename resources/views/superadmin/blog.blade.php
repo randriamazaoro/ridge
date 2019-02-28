@@ -1,15 +1,15 @@
-@extends('layouts.min.app') 
+@extends('layouts.min.app')
 
-@section('title') | Dashboard @endsection
+@section('title') | Communauté @endsection
 
-@section('content') 
+@section('content')
 
 @component('components.header')
-    @slot('url_previous') {{ url('superadmin') }} @endslot 
-    @slot('tag_previous') Administration @endslot 
-    @slot('tag_current') Communauté @endslot 
+@slot('url_previous') {{ url('superadmin') }} @endslot
+@slot('tag_previous') Administration @endslot
+@slot('tag_current') Communauté @endslot
 
-    Communauté
+Communauté
 
 @endcomponent
 
@@ -48,11 +48,8 @@
             <h1 class="title has-text-primary">Catégories</h1>
         </div>
         <div class="column is-3 is-offset-4">
-            <a
-                onclick="toggleActiveClass('#add-category')"
-                class="button is-primary is-rounded is-fullwidth"
-                >Créer une nouvelle catégorie</a
-            >
+            <a onclick="toggleActiveClass('#add-category')" class="button is-primary is-rounded is-fullwidth">Créer une
+                nouvelle catégorie</a>
         </div>
     </div>
     <br />
@@ -75,40 +72,24 @@
                         @forelse($categories as $category)
                         <tr>
                             <td>
-                                <span
-                                    class="tag {{ $category->color }} is-rounded"
-                                >
+                                <span class="tag {{ $category->color }} is-rounded">
                                     {{ $category->title }}
                                 </span>
                             </td>
                             <td>{{ $category->posts->count() }}</td>
                             <td>
-                                <a
-                                    id="id-{{ $category->id }}"
-                                    data-id="{{ $category->id }}"
-                                    data-title="{{ $category->title }}"
-                                    data-color="{{ $category->color }}"
-                                    onclick="modifyModal('category','{{ $category->id }}')"
-                                >
+                                <a id="id-{{ $category->id }}" data-id="{{ $category->id }}" data-title="{{ $category->title }}"
+                                    data-color="{{ $category->color }}" onclick="modifyModal('category','{{ $category->id }}')">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >mode_edit</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">mode_edit</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    id="delete-category-url-{{ $category->id }}"
-                                    onclick="deleteModal('category','{{ $category->id }}')" 
-                                    data-url="{{ url('superadmin/blog/delete/category/'.$category->id) }}"
-                                    >
+                                <a id="delete-category-url-{{ $category->id }}" onclick="deleteModal('category','{{ $category->id }}')"
+                                    data-url="{{ url('superadmin/blog/delete/category/'.$category->id) }}">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >delete</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">delete</i>
                                     </div>
                                 </a>
                             </td>
@@ -135,11 +116,8 @@
             <h1 class="title has-text-primary">Sujets de conversations</h1>
         </div>
         <div class="column is-3 is-offset-4">
-            <a
-                onclick="toggleActiveClass('#add-article')"
-                class="button is-primary is-rounded is-fullwidth"
-                >Ecrire un nouvel article</a
-            >
+            <a onclick="toggleActiveClass('#add-article')" class="button is-primary is-rounded is-fullwidth">Ecrire un
+                nouvel article</a>
         </div>
     </div>
     <br />
@@ -170,48 +148,28 @@
                             <td>{{ $post->subject }}</td>
                             <td>{{ $post->comments->count() }}</td>
                             <td>
-                                <b
-                                    class="tag {{ $post->category->color }} is-rounded"
-                                    >{{ $post->category->title }}</b
-                                >
+                                <b class="tag {{ $post->category->color }} is-rounded">{{ $post->category->title }}</b>
                             </td>
                             <td>
-                                <a 
-                                    id="id-{{ $post->id }}"
-                                    data-subject="{{ $post->subject }}"
-                                    data-content="{!! $post->content !!}"
+                                <a id="id-{{ $post->id }}" data-subject="{{ $post->subject }}" data-content="{!! $post->content !!}"
                                     onclick="modifyModal('post','{{ $post->id }}')">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >edit</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">edit</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    id="delete-post-url-{{ $post->id }}"
-                                    onclick="deleteModal('post','{{ $post->id }}')" 
+                                <a id="delete-post-url-{{ $post->id }}" onclick="deleteModal('post','{{ $post->id }}')"
                                     data-url="{{ url('superadmin/blog/delete/post/'.$post->id) }}">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >delete</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">delete</i>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <a
-                                    href="{{ url('blog/post/'.$post->slug) }}"
-                                    target="_blank"
-                                >
+                                <a href="{{ url('blog/post/'.$post->slug) }}" target="_blank">
                                     <div class="icon">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >open_in_new</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">open_in_new</i>
                                     </div>
                                 </a>
                             </td>
