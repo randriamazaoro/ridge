@@ -119,7 +119,8 @@ Route::prefix('superadmin')->group(function (){
 Route::get('/superadmin/{masterkey}','Auth\MasterkeyController@login');
 
 Route::prefix('paypal')->group(function (){
-	Route::get('express-checkout', 'PaypalController@payWithPaypal')->name('paypal.express-checkout');
+	Route::get('express-checkout', 'PaypalController@expressCheckout');
+	Route::get('express-checkout-success', 'PaypalController@expressCheckoutSuccess');
 
 });
 

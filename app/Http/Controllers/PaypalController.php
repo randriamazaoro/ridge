@@ -60,7 +60,7 @@ class PaypalController extends Controller
                 ->setDescription('Initiation de votre programme Ridge sur le Pack ' . $program->name);
 
             $redirect_urls = new RedirectUrls();
-            $redirect_urls->setReturnUrl(url('/admin/initiation/store')) /** Specify return URL **/
+            $redirect_urls->setReturnUrl(url('/paypal/express-checkout-success')) /** Specify return URL **/
                 ->setCancelUrl(url('/admin/initiation/summary'));
 
         }
@@ -89,7 +89,7 @@ class PaypalController extends Controller
                 ->setDescription('Mise à niveau de votre programme Ridge sur le Pack ' . $program->name);
 
             $redirect_urls = new RedirectUrls();
-            $redirect_urls->setReturnUrl(url('/admin/upgrade/store')) /** Specify return URL **/
+            $redirect_urls->setReturnUrl(url('/paypal/express-checkout-success')) /** Specify return URL **/
                 ->setCancelUrl(url('/admin/settings/upgrade/summary'));
         }
 
