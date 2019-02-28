@@ -189,24 +189,9 @@
 	</div>
 </section>
 
-
 <nav class="navbar is-fixed-bottom is-perfectly-centered columns">
     <div class="column is-3 has-text-centered">
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" name="frmTransaction" id="frmTransaction">
-            <input type="hidden" name="business" value="{{ config('paypal.client_id') }}">
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="item_name" value="Ridge: Pack {{ $program->name }} | Initiation">
-            <input type="hidden" name="item_number" value="1">
-            <input type="hidden" name="amount" value="{{ $program->price }}">
-            <input type="hidden" name="currency_code" value="EUR">
-            <input type="hidden" name="cancel_return" value="{{ url('/admin/initiation') }}">
-            <input type="hidden" name="return" value="{{ url('/paypal/payment-info') }}">
-            <button class="button is-rounded is-primary">Valider et proceder au paiement</button>
-        </form>
+        <a href="{{ url('/paypal/express-checkout') }}" class="button is-rounded is-primary">Valider et proceder au paiement</a>
     </div>
 </nav>
-
-
-
-
 @endsection
