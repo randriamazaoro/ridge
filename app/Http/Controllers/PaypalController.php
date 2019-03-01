@@ -102,7 +102,7 @@ class PaypalController extends Controller
         try {
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
-            if (\Config::get('app.debug')) {
+            if (config('app.debug')) {
                 echo "Exception: " . $ex->getMessage() . PHP_EOL;
                 $err_data = json_decode($ex->getData(), true);
                 exit;
@@ -119,7 +119,7 @@ class PaypalController extends Controller
         }
 
         // add payment ID to session
-        Session::put('paypal_payment_id', $payment->getId());
+        $request->session()->put('paypal_payment_id', $payment->getId());
 
         if (isset($redirect_url)) {
             // redirect to paypal
