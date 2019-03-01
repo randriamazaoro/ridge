@@ -61,7 +61,7 @@ class PaypalController extends Controller
 
             $redirect_urls = new RedirectUrls();
             $redirect_urls->setReturnUrl(url('/paypal/express-checkout-success')) /** Specify return URL **/
-                ->setCancelUrl(url('/admin/initiation/summary'));
+                ->setCancelUrl(url('/admin/initiation'));
 
         }
 
@@ -90,7 +90,7 @@ class PaypalController extends Controller
 
             $redirect_urls = new RedirectUrls();
             $redirect_urls->setReturnUrl(url('/paypal/express-checkout-success')) /** Specify return URL **/
-                ->setCancelUrl(url('/admin/settings/upgrade/summary'));
+                ->setCancelUrl(url('/admin/settings/upgrade'));
         }
 
         $payment = new Payment();
@@ -119,7 +119,7 @@ class PaypalController extends Controller
         }
 
         // add payment ID to session
-        $request->session()->put('paypal_payment_id', $payment->getId());
+        session('paypal_payment_id', $payment->getId());
 
         if (isset($redirect_url)) {
             // redirect to paypal
@@ -133,10 +133,10 @@ class PaypalController extends Controller
     public function expressCheckoutSuccess()
     {
         // Get the payment ID before session clear
-        $payment_id = $request->session()->get('paypal_payment_id');
+        $payment_id = session('paypal_payment_id');
 
         // clear the session payment ID
-        $request->session()->forget('paypal_payment_id');
+        session()->forget('paypal_payment_id');
 
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
