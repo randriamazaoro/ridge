@@ -152,10 +152,6 @@ class PaypalController extends Controller
         //Execute the payment
         $result = $payment->execute($execution, $this->_api_context);
 
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';exit; // DEBUG RESULT, remove it later
-
         if ($result->getState() == 'approved') { // payment made
             if (session('transaction_type') == "initiation") {
                 return redirect()->action('Admin\InitiationController@store');
