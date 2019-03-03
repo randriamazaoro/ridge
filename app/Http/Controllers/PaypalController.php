@@ -135,7 +135,6 @@ class PaypalController extends Controller
         $payment_id = session('paypal_payment_id');
 
         // clear the session payment ID
-        session()->forget('paypal_payment_id');
 
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
@@ -166,6 +165,9 @@ class PaypalController extends Controller
                 return redirect()->action('Admin\UpgradeController@store');
             }
         }
+
+        session()->forget('paypal_payment_id');
+
         return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
     }
 

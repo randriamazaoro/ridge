@@ -253,7 +253,7 @@
             <h1 class="title is-2 has-text-primary">Vous avez des doutes ?</h1>
             <h2 class="subtitle">Vous pouvez lire notre FAQ pour plus de détails</h2>
             <br />
-            @foreach(App\Faq::all()->take(2) as $faq)
+            @foreach(App\Faq::all()->random(2) as $faq)
             <a href="{{ url('/docs') }}" class="box">
                 <p>
                     <b>{{ $faq->question }}</b><br />
