@@ -129,10 +129,10 @@ class PaypalController extends Controller
 
     }
 
-    public function expressCheckoutSuccess()
+    public function expressCheckoutSuccess(Request $request)
     {
         // Get the payment ID before session clear
-        $payment_id = session('paypal_payment_id');
+        $payment_id = $request->paymentId;
 
         // clear the session payment ID
 
@@ -165,8 +165,6 @@ class PaypalController extends Controller
                 return redirect()->action('Admin\UpgradeController@store');
             }
         }
-
-        session()->forget('paypal_payment_id');
 
         return redirect('admin/initiation')->with(['paypal' => 'danger', 'message' => 'Il y a eu un problème avec PayPal']);
     }
