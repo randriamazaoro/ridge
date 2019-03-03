@@ -3,6 +3,9 @@
 @section('content')
 
 @include('partials.navigation-positionned',['color' => 'is-dark'])
+<div class="pageloader">
+    wewe
+</div>
 <!-- HEADER -->
 <header class="hero has-background-abstract">
     <!-- TEXT -->
@@ -150,7 +153,7 @@
                 ce dernier n'est pas supportée
             </p>
             <br />
-            <a href="{{ url('contact') }}" class="button is-primary is-inverted is-rounded">En savoir plus...</a>
+            <a href="{{ url('contact') }}" class="button is-primary is-inverted is-rounded is-medium"><b>En savoir plus...</b></a>
         </div>
     </div>
 </section>
@@ -251,17 +254,17 @@
             <h2 class="subtitle">Vous pouvez lire notre FAQ pour plus de détails</h2>
             <br />
             @foreach(App\Faq::all()->take(2) as $faq)
-            <div class="box">
+            <a href="{{ url('/docs') }}" class="box">
                 <p>
                     <b>{{ $faq->question }}</b><br />
-                    {{ $faq->answer }}
+                    {!! str_limit(nl2br(e($faq->answer)), 150) !!}
                 </p>
-            </div>
+            </a>
             @endforeach
 
             <div class="field">
                 <div class="control">
-                    <a href="{{ url('docs') }}" class="button is-primary is-rounded">Voir plus d'informations...</a>
+                    <a href="{{ url('docs') }}" class="button is-primary is-rounded is-medium">Voir plus d'informations...</a>
                 </div>
             </div>
         </div>

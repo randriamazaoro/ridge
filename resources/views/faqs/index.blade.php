@@ -15,7 +15,8 @@
 
 @endcomponent
 
-<section class="section container">
+<section class="section">
+    <div class="container">
             <h1 class="title has-text-primary">Compte</h1>
             <br/>
 

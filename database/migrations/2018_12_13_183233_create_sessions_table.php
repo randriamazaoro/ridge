@@ -36,7 +36,7 @@ class CreateSessionsTable extends Migration
             $table->string('theme_maxi_1')->nullable();
             $table->string('theme_maxi_2')->nullable();
             $table->string('theme_maxi_3')->nullable();
-            $table->integer('last_activity');
+            $table->string('paypal_payment_id')->nullable();
         });
     }
 
