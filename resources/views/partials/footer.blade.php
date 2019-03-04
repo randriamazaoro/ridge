@@ -1,5 +1,6 @@
 <hr />
-<footer class="section container">
+<br/>
+<footer class="container">
     <small>
         <div class="columns">
             <div class="column is-4">
@@ -43,9 +44,19 @@
         <div class="columns is-vcentered">
             <span class="column has-text-left">© {{ date('Y') }} Copyright - Ridge | Website made by <a href="{{ config('app.editor_url') }}"><b>Randriamazaoro</b></a></span>
             <span class="column has-text-right">
-                <a href="https://www.facebook.com/Ridgeofficiel" target="_blank" class="icon is-medium">
+                <a href="https://www.facebook.com/Ridgeofficiel" target="_blank" class="icon is-large">
                     <figure class="image is-32x32">
                         <img src="{{ asset("svg/social/facebook.svg") }}" />
+                    </figure>
+                </a>
+                <a href="https://twitter.com/OfficielRidge" target="_blank" class="icon is-large">
+                    <figure class="image is-32x32">
+                        <img src="{{ asset("svg/social/twitter.svg") }}" />
+                    </figure>
+                </a>
+                <a href="https://www.linkedin.com/in/ridge-officiel-441619181/" target="_blank" class="icon is-large">
+                    <figure class="image is-32x32">
+                        <img src="{{ asset("svg/social/linkedin.svg") }}" />
                     </figure>
                 </a>
             </a>

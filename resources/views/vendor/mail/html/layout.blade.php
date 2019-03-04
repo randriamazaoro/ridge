@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<body style="background:#fefefe;margin:auto">
  
 
-<div class="section container is-perfectly-centered" style="width:100%">
+<div style="margin:100px">
     <div style="width:450px">
         {{ $header ?? '' }}
-        <div class="box">
+        <div style="background:#fff; border:1px solid #ddd; padding:25px;">
             {{ Illuminate\Mail\Markdown::parse($slot) }} {{ $subcopy ?? '' }}
         </div>
         

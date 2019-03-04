@@ -104,7 +104,7 @@ Liste des programes et des themes de formation
                         @foreach($themes as $theme)
                         <tr>
                             <td>{{ $theme->title }}</td>
-                            <td>{{ $theme->description }}</td>
+                            <td>{!! nl2br($theme->description) !!}</td>
                             <td>
                                 <a id="id-{{ $theme->id }}" onclick="modifyModal('theme','{{ $theme->id }}')" data-id="{{ $theme->id }}"
                                     data-title="{{ $theme->title }}" data-url="{{ $theme->url }}" data-description="{{ $theme->description }}">

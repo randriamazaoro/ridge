@@ -3,9 +3,6 @@
 @section('content')
 
 @include('partials.navigation-positionned',['color' => 'is-dark'])
-<div class="pageloader">
-    wewe
-</div>
 <!-- HEADER -->
 <header class="hero has-background-abstract">
     <!-- TEXT -->

@@ -53,7 +53,7 @@
                         <div class="is-perfectly-centered">
                             <figure class="image is-128x128">
                                 <img src="{{
-                                asset("svg/{$program->name}.svg")}}" />
+                                asset('svg/'. strtolower($program->name).'.svg')}}" />
                             </figure>
                         </div>
                         <br />
@@ -83,10 +83,6 @@
                             </li>
                             <br />
                             <li><b>Social :</b> {{ $program->social }}</li>
-                            <br />
-                            <li>
-                                <b>Avantages :</b> {{ $program->advantages }}
-                            </li>
                         </ul>
                     </div>
                 </div>

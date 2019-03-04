@@ -226,7 +226,7 @@
         <div class="columns">
             <div class="column is-3 is-perfectly-centered">
                 <figure class="image is-128x128">
-                    <img src="{{ asset('svg/'.$affiliate->program.'.svg') }}" />
+                    <img src="{{ asset('svg/'.strtolower($affiliate->program).'.svg') }}" />
                 </figure>
             </div>
             <div class="column is-4 content">

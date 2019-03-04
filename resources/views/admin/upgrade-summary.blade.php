@@ -1,7 +1,7 @@
 @extends('layouts.min.app')
 
 @section('title')
-	 | Dashboard
+	 | Résumé de la mise à niveau du programme
 @endsection
 
 @section('content')

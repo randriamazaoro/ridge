@@ -2,7 +2,7 @@
 	<div class="control">
     <a
         href="{{ $url }}"
-        class="button is-rounded {{ $color ?? 'is-primary' }} {{ $type ?? '' }} is-fullwidth"
+        class="button is-rounded {{ $color ?? 'is-primary' }} {{ $type ?? '' }}"
         target="_blank"
         >{{ $slot }}</a
     >

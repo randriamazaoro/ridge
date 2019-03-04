@@ -2,10 +2,6 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            <figure class="image">
-                <img src="{{ asset('svg/logo.svg') }}" style="height:50px;" />
-            </figure>
-            <br/>
         @endcomponent
     @endslot
 
