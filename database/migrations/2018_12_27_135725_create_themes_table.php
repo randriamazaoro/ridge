@@ -40,12 +40,13 @@ class CreateThemesTable extends Migration
                 Changement sans stress, comment avoir une excellente mémoire, la maîtrise de soi, tout le monde mérite d\'etre riche etc...',
             ],[
                 'title' => 'La gestion d\'entreprise',
-                'url' => '',
+                'url' => 'https://mega.nz/#F!cJcRgQBb!cB85owqhf6wSPwF5zJwEVg',
                 'description' => '+ 290 livres PDF sur : compatibilité, marketing, logistique, IAS IFRS, Business plan, stratégie, contrôle de gestion, création d\'entreprise etc...',
             ],[
                 'title' => 'Le leadership et le management',
-                'url' => '',
-                'description' => '+ 20 formations video interactive sur le leadership, le management : accueillir le changement, savoir gérer son temps, réussir sa prise de parole en public, le management situationnel, prendre de bonnes décisions etc...',
+                'url' => 'https://mega.nz/#F!kIMRUKAB!14RMDTS2m0j-yVfzO6Vy9Q',
+                'description' => '(Encore en maintenance)
+                + 20 formations video interactive sur le leadership, le management : accueillir le changement, savoir gérer son temps, réussir sa prise de parole en public, le management situationnel, prendre de bonnes décisions etc...',
             ],
         ]);
     }
