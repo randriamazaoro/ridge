@@ -20,7 +20,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-
+            <br/>
             Cordialement,<br>
             <b>{{ config('app.name') }}</b>
             <br/>
