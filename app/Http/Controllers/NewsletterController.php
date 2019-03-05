@@ -41,7 +41,7 @@ class NewsletterController extends Controller
         if (isset($newsletter_email) && $newsletter_email->downloaded == false){
 
             $newsletter_email->downloaded = true;
-            return Storage::download('SuperAffiliation.pdf');
+            return Storage::download('public/SuperAffiliation.pdf');
         }
 
         return redirect('/');

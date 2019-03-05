@@ -10,7 +10,7 @@
 <div style="margin:100px">
     <div style="width:450px">
         {{ $header ?? '' }}
-        <div style="background:#fff; border:1px solid #ddd; padding:25px;">
+        <div class="box">
             {{ Illuminate\Mail\Markdown::parse($slot) }} {{ $subcopy ?? '' }}
         </div>
         
