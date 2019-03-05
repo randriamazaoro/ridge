@@ -7,10 +7,10 @@
 <body style="background:#fefefe;margin:auto">
  
 
-<div style="margin:100px">
-    <div style="width:450px">
+<div style="width:100%">
+    <div style="width:450px;margin:auto;margin-top:50px">
         {{ $header ?? '' }}
-        <div class="box">
+        <div style="background:#fff; border:1px solid #ddd; padding:25px; border-radius:20px;">
             {{ Illuminate\Mail\Markdown::parse($slot) }} {{ $subcopy ?? '' }}
         </div>
         

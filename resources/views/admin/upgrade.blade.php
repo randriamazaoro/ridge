@@ -132,7 +132,7 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{ asset('sass/extensions/bulma-steps/dist/js/bulma-steps.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bulma-steps.min.js') }}"></script>
 <script type="text/javascript">
     bulmaSteps.attach();
 </script>
