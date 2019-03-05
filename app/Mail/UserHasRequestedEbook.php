@@ -31,6 +31,10 @@ class UserHasRequestedEbook extends Mailable
     {
         return $this->markdown('emails.user.has-requested-ebook')
                     ->subject('Voici votre e-book gratuit: Super Affiliation !')
+                    ->attach('/ebook/SuperAffiliation.pdf', [
+                        'as' => 'name.pdf',
+                        'mime' => 'application/pdf',
+                    ])
                     ->with('token', $this->token);
     }
 }
