@@ -2,6 +2,8 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
+        <img src="https://www.ridge.work/svg/logo.svg" style="height:60px"/>
+        <br/>
         @endcomponent
     @endslot
 

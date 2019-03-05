@@ -9,7 +9,7 @@
 </div>
 <br />
 
-@component('mail::button', ['url' => url("newsletter/download/ebook/{$token}") ])
+@component('mail::button', ['url' => "https://www.ridge.work/ebook/SuperAffiliation.pdf" ])
 Télécharger le livre
 @endcomponent
 

@@ -17,10 +17,6 @@ class UserHasRequestedEbook extends Mailable
      *
      * @return void
      */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
 
     /**
      * Build the message.
@@ -30,11 +26,6 @@ class UserHasRequestedEbook extends Mailable
     public function build()
     {
         return $this->markdown('emails.user.has-requested-ebook')
-                    ->subject('Voici votre e-book gratuit: Super Affiliation !')
-                    ->attach('/ebook/SuperAffiliation.pdf', [
-                        'as' => 'name.pdf',
-                        'mime' => 'application/pdf',
-                    ])
-                    ->with('token', $this->token);
+                    ->subject('Voici votre e-book gratuit: Super Affiliation !');
     }
 }
