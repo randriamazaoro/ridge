@@ -13,7 +13,7 @@
 Télécharger le livre
 @endcomponent
 
-@component('mail::button', ['url' => url('register'), 'type' =>'is-outlined' ])
+@component('mail::button', ['url' => url('register'), 'type' =>'background-color: none; color: #00ace8' ])
 S'inscrire chez Ridge
 @endcomponent
 

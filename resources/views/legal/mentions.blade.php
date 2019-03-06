@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Althmo | Mentions Légales
+| Mentions Légales
 @endsection
 
 @section('content')
@@ -63,17 +63,7 @@ Mentions légales
                 </p>
 
                 <p>
-                    <span><span>Hébergeur</span></span>
-                </p>
-
-                <p>
-                    <span><span>Développement</span> :</span>
-                </p>
-
-                <p>
-                    <span>Wix.com <span>Inc</span>
-                        <span><span>Adresse</span></span><span> :</span> 235 West 23rd Street, 8th Floor. New
-                        York, USA Site <span>Web :</span> www.wix.com</span><span> </span>
+                    <span><span>Hébergeur:</span></span> DigitalOcean.
                 </p>
 
                 <p>

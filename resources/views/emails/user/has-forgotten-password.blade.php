@@ -1,12 +1,5 @@
 @component('mail::message')
 
-<div class="is-perfectly-centered">
-	<figure class="image is-128x128">
-		<img src="{{ asset('svg/security.svg') }}" />
-	</figure>
-</div>
-<br />
-
 <h1 class="title is-4 has-text-primary has-text-centered">
 	Réinitialiser votre mot de passe?
 </h1>

@@ -1,12 +1,5 @@
 @component('mail::message')
 
-<div class="is-perfectly-centered">
-<figure class="image is-128x128">
-    <img src="{{ asset('svg/shopping-basket.svg') }}" />
-</figure>
-</div>
-<br/>
-
 <p class="title is-5 has-text-centered">Bonjour {{ $user->first_name }}!</p>
 <h1 class="title is-4 has-text-primary has-text-centered">Un de vos filleul a acheté
 	<br/> le Pack {{ $sale->product }}</h1>

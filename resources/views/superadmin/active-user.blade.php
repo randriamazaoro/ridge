@@ -184,7 +184,7 @@
                 </p>
                 <p>
                     <b>Commission par emails collectées :</b><br />
-                    {{ $affiliate->gains_per_email }}$
+                    {{ $affiliate->gains_per_email }}€
                 </p>
             </div>
             <div class="column is-4 content">

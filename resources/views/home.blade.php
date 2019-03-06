@@ -206,6 +206,12 @@
             </div>
         </div>
     </div>
+    <br/>
+    <p class="has-text-centered">
+        <a href="{{ url('register') }}" class="button is-primary is-medium is-rounded">
+            <b>En savoir plus...</b>
+        </a>
+    </p>
 </section>
 <!-- DESCRIPTION -->
 
@@ -242,6 +248,12 @@
             </div>
         </div>
     </div>
+    <br/>
+    <p class="has-text-centered">
+        <a href="{{ url('register') }}" class="button is-primary is-medium is-rounded is-inverted">
+            <b>Ouvrir un compte</b>
+        </a>
+    </p>
 </section>
 
 <section class="section is-medium">

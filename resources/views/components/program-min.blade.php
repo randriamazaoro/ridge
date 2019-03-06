@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="column is-2">
-			<span class="tag is-success is-rounded is-size-6">{{ $price }} $</span>
+			<span class="tag is-success is-rounded is-size-6">{{ $price }} €</span>
 			<p class="title is-4">Pack {{ $program }}</p>
 		</div>
 
@@ -15,7 +15,7 @@
 			<ul>
 				<li><b>Formation :</b> {{ $formation }}</li>
 				<li><b>Rémunération :</b> {{ $remuneration }}.
-				<br/>Dont <b class="has-text-warning">{{ $gains_per_email }}$ </b> par email collecté et <b class="has-text-warning">{{ $gains_per_sale }}%</b> de commission par vente</li>
+				<br/>Dont <b class="has-text-warning">{{ $gains_per_email }}€ </b> par email collecté et <b class="has-text-warning">{{ $gains_per_sale }}%</b> de commission par vente</li>
 				<li><b>Social :</b> {{ $social }}</li>
 			</ul>
 		</div>

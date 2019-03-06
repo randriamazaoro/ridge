@@ -1,12 +1,5 @@
 @component('mail::message')
 
-<div class="is-perfectly-centered">
-<figure class="image is-128x128">
-    <img src="{{ asset('svg/envelope-1.svg') }}" />
-</figure>
-</div>
-<br/>
-
 <p class="title is-5 has-text-centered">Bonjour !</p>
 <h1 class="title is-4 has-text-primary has-text-centered">Vous avez un nouveau message venant de  {{ $request->name }}</h1>
 
@@ -22,7 +15,7 @@
 
 <br/>
 
-@component('mail::button', ['url' => url("superadmin"), 'type' => ''])
+@component('mail::button', ['url' => url("superadmin")])
 Aller au panneau de contrôle
 @endcomponent
 
