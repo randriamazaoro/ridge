@@ -47,7 +47,8 @@ class TransferRequestController extends Controller
 
 	public function update($id)
 	{
-		$user = User::find($id);
+		$user = User::findOrFail($id);
+		$affiliate = Affiliate::findOrFail($id);
 
 		$transfer_request = 
 		TransferRequest::where('affiliate_id',$id)
@@ -60,8 +61,12 @@ class TransferRequestController extends Controller
 
 		$requested_emails = 
 		Email::where('affiliate_id',$id)
-			->where('requested',true)
-			->update([
+			->where('requested',true);
+
+		$affiliate->gains_per_email_limit -= $requested_emails->count();
+		$affiliate->save();
+
+		$requested_emails->update([
 				'requested' => false,
 				'status' => 'Payé',
 				'tag' => 'is-primary',
@@ -82,7 +87,7 @@ class TransferRequestController extends Controller
 		return redirect('superadmin/finances')->with([
     					'code' => 'transfer-completed',
     					'image' => 'money-bag',
-    					'title' => 'Transfert réussit !',
+    					'title' => 'Demande de transfert marqué comme réussit !',
     					'subtitle' => '',
     					]);
 

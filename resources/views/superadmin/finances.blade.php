@@ -190,22 +190,12 @@
                             <th>Affilié</th>
                             <th>Montant désiré</th>
                             <th></th>
-                            <th></th>
                         </tr>
                         @forelse($paid_transfer_requests as $request)
                         <tr>
                             <td><b>{{ $request->created_at }}</b></td>
                             <td>{{ $request->affiliate_id }}</td>
                             <td>{{ $request->amount }} €</td>
-                            <td>
-                                <a 
-                                    href="{{ url('superadmin/finances/transfer-request/'.$request->affiliate_id) }}"
-                                    >
-                                    <span class="icon">
-                                        <i class="material-icons has-text-primary is-size-3">payment</i>
-                                    </span>
-                                </a>
-                            </td>
                             <td>
                                 <a 
                                     href="{{ url('superadmin/users/'.$request->to) }}"

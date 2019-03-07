@@ -96,7 +96,7 @@
                 >Annuler ma demande de virement</a
             >
             @endisset @empty($transfer_request) @if($approuved_sales_value +
-            $approuved_emails_value > 50)
+            $approuved_emails_value > 10)
             <a
                 class="button is-primary is-rounded is-fullwidth"
                 href="{{ url('admin/transfer-request') }}"

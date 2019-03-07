@@ -42,6 +42,24 @@
 		</div>
 	</div>
 
+	<h2 class="title is-5">Details de la transaction</h2>
+	<div class="box">
+			<div class="columns is-vcentered content">
+				<div class="column is-3 is-perfectly-centered">
+					<figure class="image is-128x128">
+						<img src="{{ asset('svg/credit-card.svg') }}" />
+					</figure>
+				</div>
+	
+				<div class="column is-4">
+					<p>
+						<b>Adresse Paypal</b><br />
+						{{ $user->paypal_address }}
+					</p>
+				</div>
+			</div>
+		</div>
+
 <nav class="navbar is-fixed-bottom is-perfectly-centered columns">
 	<div class="column is-3 has-text-centered">
 		<a 
