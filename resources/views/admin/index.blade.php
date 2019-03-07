@@ -96,7 +96,7 @@
                 >Annuler ma demande de virement</a
             >
             @endisset @empty($transfer_request) @if($approuved_sales_value +
-            $approuved_emails_value > 10)
+            $approuved_emails_value > 50)
             <a
                 class="button is-primary is-rounded is-fullwidth"
                 href="{{ url('admin/transfer-request') }}"
@@ -167,19 +167,19 @@
             <div class="column is-3">
                 <p class="heading">Approuvés</p>
                 <p class="title">
-                    {{ $approuved_sales_value + $approuved_emails_value }}$
+                    {{ $approuved_sales_value + $approuved_emails_value }} €
                 </p>
             </div>
 
             <div class="column is-3">
                 <p class="heading">En attente</p>
-                <p class="title">{{ $pending_emails_value }}$</p>
+                <p class="title">{{ $pending_emails_value }} €</p>
             </div>
 
             <div class="column is-3">
                 <p class="heading">Payées</p>
                 <p class="title">
-                    {{ $paid_emails_value + $paid_sales_value }}$
+                    {{ $paid_emails_value + $paid_sales_value }} €
                 </p>
             </div>
         </div>
@@ -201,7 +201,7 @@
 
             <div class="column is-3">
                 <p class="heading">Email Collectées</p>
-                <p class="title">{{ $emails->count() }}</p>
+                <p class="title">{{ $emails->count() }} / <small class="tooltip is-tooltip-multiline" data-tooltip="Ceci est la le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite.">{{ $affiliate->gains_per_email_limit }}</small></p>
             </div>
         </div>
     </a>
@@ -240,7 +240,7 @@
                 </p>
                 <p>
                     <b>Commission par emails collectées :</b><br />
-                    {{ $affiliate->gains_per_email }}$
+                    {{ $affiliate->gains_per_email }} €
                 </p>
             </div>
             <div class="column is-4 content">
@@ -354,7 +354,7 @@
 
                             <td>
                                 <b class="has-text-success">
-                                    {{ $email->referral_value }}$
+                                    {{ $email->referral_value }} €
                                 </b>
                             </td>
 
@@ -399,7 +399,7 @@
                             <td>Pack {{ $sale->product }}</td>
                             <td>
                                 <b class="has-text-success">
-                                    {{ $sale->referral_value }}$
+                                    {{ $sale->referral_value }} €
                                 </b>
                             </td>
                             <td>

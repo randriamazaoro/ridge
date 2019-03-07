@@ -54,6 +54,7 @@
 			@slot('gains_per_email') {{ $program->gains_per_email }} @endslot
 			@slot('gains_per_sale') {{ $program->gains_per_sale * 100 }} @endslot
 			@slot('social') {{ $program->social }} @endslot
+			@slot('limit') {{ $program->gains_per_email_limit }} @endslot
 		@endcomponent 	
 
 	<br />

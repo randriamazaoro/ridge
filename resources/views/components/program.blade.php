@@ -24,7 +24,9 @@
                 commission par vente
             </li>
             <br />
-            <li><b>Social :</b> {{ $social }}</li>
+            <li><b>Social :</b> {{ $social }}</li><br/>
+            <li><b>Pour les affiliés:</b><br/> 
+                Etend la limite des gains approuvés de <b class="has-text-warning">{{ $limit }} e-mails</b> pour le CPA à chaque vente de ce produit.</li>
             <br />
         </ul>
         <br />

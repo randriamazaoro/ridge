@@ -30,12 +30,12 @@
 
             <div class="column is-3">
                 <p class="heading">Total des chiffres de ventes</p>
-                <p class="title">{{ App\Sale::sum('real_value') }}$</p>
+                <p class="title">{{ App\Sale::sum('real_value') }} €</p>
             </div>
 
             <div class="column is-3">
                 <p class="heading">Bénéfices</p>
-                <p class="title">{{ App\Sale::sum('benefits') - App\Email::sum('referral_value') }}$</p>
+                <p class="title">{{ App\Sale::sum('benefits') - App\Email::sum('referral_value') }} €</p>
             </div>
 
             <div class="column is-3">
@@ -44,7 +44,7 @@
                     {{ 
                         App\Sale::sum('referral_value') 
                         + App\Email::sum('referral_value') 
-                    }}$
+                    }} €
                 </p>
             </div>
             
@@ -69,7 +69,7 @@
                         App\Sale::where('status','Approuvé')->sum('referral_value')
                         + 
                         App\Email::where('status','!=','Payé')->sum('referral_value') 
-                    }}$
+                    }} €
                 </p>
             </div>
 
@@ -80,7 +80,7 @@
                         App\Sale::where('status','Payé')->sum('referral_value')
                         + 
                         App\Email::where('status','Payé')->sum('referral_value') 
-                    }}$
+                    }} €
                 </p>
             </div>
 
@@ -138,7 +138,7 @@
                         <tr>
                             <td><b>{{ $request->created_at }}</b></td>
                             <td>{{ $request->affiliate_id }}</td>
-                            <td>{{ $request->amount }}$</td>
+                            <td>{{ $request->amount }} €</td>
                             <td>
                                 <a 
                                     href="{{ url('superadmin/finances/transfer-request/'.$request->affiliate_id) }}"
@@ -196,7 +196,7 @@
                         <tr>
                             <td><b>{{ $request->created_at }}</b></td>
                             <td>{{ $request->affiliate_id }}</td>
-                            <td>{{ $request->amount }}$</td>
+                            <td>{{ $request->amount }} €</td>
                             <td>
                                 <a 
                                     href="{{ url('superadmin/finances/transfer-request/'.$request->affiliate_id) }}"
@@ -267,14 +267,14 @@
                                 <b class="has-text-warning">
                                     {{ 
                                         $affiliate->sales->where('status','En attente')->sum('referral_value') 
-                                        + $affiliate->emails->where('status','En attente')->sum('referral_value') }}$
+                                        + $affiliate->emails->where('status','En attente')->sum('referral_value') }} €
                                 </b>
                             </td>
                             <td>
                                 <b class="has-text-success">
                                     {{ 
                                         $affiliate->sales->where('status','Approuvé')->sum('referral_value') 
-                                        + $affiliate->emails->where('status','Approuvé')->sum('referral_value') }}$
+                                        + $affiliate->emails->where('status','Approuvé')->sum('referral_value') }} €
                                 </b>
                             </td>
 
@@ -282,7 +282,7 @@
                                 <b class="has-text-primary">
                                     {{ 
                                         $affiliate->sales->where('status','Payé')->sum('referral_value') 
-                                        + $affiliate->emails->where('status','Payé')->sum('referral_value') }}$
+                                        + $affiliate->emails->where('status','Payé')->sum('referral_value') }} €
                                 </b>
                             </td>
                             
@@ -341,7 +341,7 @@
                             <td>{{ $email->affiliate_id }}</td>
                             <th>
                                 <b class="has-text-danger">
-                                    {{ $email->referral_value }}$
+                                    {{ $email->referral_value }} €
                                 </b>
                             </th>
                             <td>
@@ -388,6 +388,7 @@
                             <th>Réferrant</th>
                             <th>Produit</th>
                             <th>Valeur réelle</th>
+                            <th>Pourcentage du référant</th>
                             <th>Pertes</th>
                             <th>Bénéfices</th>
                             <th>Status</th>
@@ -398,15 +399,16 @@
                             <td><b>{{ $sale->created_at }}</b></td>
                             <td>{{ $sale->affiliate_id }}</td>
                             <td>Pack {{ $sale->product }}</td>
-                            <td>{{ $sale->real_value }}$</td>
+                            <td>{{ $sale->real_value }} €</td>
+                            <td>{{ $sale->affiliate->gains_per_sale * 100 }} %</td>
                             <td>
                                 <b class="has-text-danger">
-                                {{ $sale->referral_value }}$
+                                {{ $sale->referral_value }} €
                                 </b>
                             </td>
                             <td>
                                 <b class="has-text-success">
-                                    {{ $sale->benefits }}$
+                                    {{ $sale->benefits }} €
                                 </b>
                             </td>
 
@@ -427,7 +429,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td>Vous n'avez pas encore effectué des ventes</td>
+                            <td colspan="5">Vous n'avez pas encore effectué de ventes</td>
                         </tr>
                         @endforelse
                         

@@ -92,8 +92,7 @@
                 <div class="column is-12 content">
                     <p>
                         <b>Une formation</b><br />
-                        Plusieurs documents (e-books, video, logiciels
-                        intéractifs) axé sur de nombreux thèmes.
+                        Plusieurs documents (e-books, vidéo, logiciels interactifs) axé sur de nombreux thèmes.
                     </p>
                 </div>
             </div>
@@ -179,8 +178,8 @@
                         <p class="title is-4">L'affiliation</p>
                         <p>
                             En <b>revendant nos produits</b> à travers votre
-                            lien de réferrence, vous gagner entre
-                            <b>15% jusqu'à 25% de commission</b>, en fonction du
+                            lien de réference, vous gagner entre
+                            <b>15 % jusqu'à 25 % de commission</b>, en fonction du
                             programme que vous avez choisi et acheté.
                         </p>
                     </div>
@@ -196,16 +195,20 @@
                         <br />
                         <p class="title is-4">CPA</p>
                         <p>
-                            En <b>invitant le maximum de personne</b> à
+                            En <b>invitant le maximum de personne*</b> à
                             s'inscrire chez nous, vous gagnez entre
                             <b>0.5€ à 1€ à chaque e-mail validé</b>, en fonction
                             du programme que vous avez choisi et acheté.
+                            
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <p class="has-text-centered">
+        <small>* Gains approuvés limités à 10 adresses e-mail à l'inscription et augmente à chaque ventes effectué (selon le produit vendu)</small>
+    </p>
     <br/>
     <p class="has-text-centered">
         <a href="{{ url('register') }}" class="button is-primary is-medium is-rounded">
@@ -243,6 +246,7 @@
                 @slot('gains_per_email') {{ $program->gains_per_email }} @endslot
                 @slot('gains_per_sale') {{ $program->gains_per_sale * 100 }} @endslot
                 @slot('social') {{ $program->social }} @endslot
+                @slot('limit') {{ $program->gains_per_email_limit }} @endslot
                 @endcomponent
                 @endforeach
             </div>

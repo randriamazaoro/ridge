@@ -37,7 +37,7 @@ class CreateProgramsTable extends Migration
             'advantages' =>  'N/A',
             'gains_per_email' => 0.5,
             'gains_per_sale' => 0.15,
-            'gains_per_email_limit' => 10,
+            'gains_per_email_limit' => 0,
         ],[
             'name' => 'Maxi',
             'price' => 25,
@@ -47,7 +47,7 @@ class CreateProgramsTable extends Migration
             'advantages' =>  'N/A',
             'gains_per_email' => 0.5,
             'gains_per_sale' => 0.25,
-            'gains_per_email_limit' => 25,
+            'gains_per_email_limit' => 5,
         ],[
             'name' => 'Ultra',
             'price' => 75,
@@ -57,7 +57,7 @@ class CreateProgramsTable extends Migration
             'advantages' => 'Une liste des Business en ligne',
             'gains_per_email' => 1,
             'gains_per_sale' => 0.15,
-            'gains_per_email_limit' => 45,
+            'gains_per_email_limit' => 10,
         ]
         ]);
     }

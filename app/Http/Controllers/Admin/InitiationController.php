@@ -112,7 +112,7 @@ class InitiationController extends Controller {
 			'program' => $program->name,
 			'gains_per_email' => $program->gains_per_email,
 			'gains_per_sale' => $program->gains_per_sale,
-			'gains_per_email_limit' => $program->gains_per_email_limit,
+			'gains_per_email_limit' => 10,
 		]);
 
 		$sale =

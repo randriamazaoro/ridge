@@ -119,18 +119,18 @@
 
 			<div class="column is-3">
 				<p class="heading">Approuvées</p>
-				<p class="title">{{ $approuved_sales_value + $approuved_emails_value }}$</p>
+				<p class="title">{{ $approuved_sales_value + $approuved_emails_value }} €</p>
 			</div>
 
 			<div class="column is-3">
 				<p class="heading">En attente</p>
-				<p class="title">{{ $pending_emails_value}}$</p>
+				<p class="title">{{ $pending_emails_value}} €</p>
 			</div>
 
 			<div class="column is-3">
 				<p class="heading">Payées</p>
 				<p class="title">
-					{{ $paid_emails_value + $paid_sales_value}}$
+					{{ $paid_emails_value + $paid_sales_value}} €
 				</p>
 			</div>
 		</div>
@@ -152,7 +152,7 @@
 
 			<div class="column is-3">
 				<p class="heading">Email Collectées</p>
-				<p class="title">{{ $emails->count() }}</p>
+				<p class="title">{{ $emails->count() }} / <small class="tooltip is-tooltip-multiline" data-tooltip="Ceci est la le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite.">{{ $affiliate->gains_per_email_limit }}</small></p>
 			</div>
 		</div>
 	</a>
@@ -184,7 +184,7 @@
                 </p>
                 <p>
                     <b>Commission par emails collectées :</b><br />
-                    {{ $affiliate->gains_per_email }}€
+                    {{ $affiliate->gains_per_email }} €
                 </p>
             </div>
             <div class="column is-4 content">
@@ -282,7 +282,7 @@
                         @forelse($emails as $email)
                         <tr>
                             <td><b>{{ $email->created_at }}</b></td>
-                            <td>{{ $email->referral_value }}$</td>
+                            <td>{{ $email->referral_value }} €</td>
                             <td>
                                 <b class="tag is-rounded {{ $email->tag }}"
                                     >{{ $email->status }}</b
@@ -321,7 +321,7 @@
                         <tr>
                             <td><b>{{ $sale->created_at }}</b></td>
                             <td>Pack {{ $sale->product }}</td>
-                            <td>{{ $sale->referral_value }}$</td>
+                            <td>{{ $sale->referral_value }} €</td>
                             <td>
                                 <b class="tag is-rounded {{ $sale->tag }}"
                                     >{{ $sale->status }}</b

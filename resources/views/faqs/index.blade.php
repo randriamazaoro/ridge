@@ -47,46 +47,18 @@
             <br/>
 
             <div class="tile is-ancestor">
-                @foreach(App\Program::all() as $program)
-                <div class="tile is-parent is-4">
-                    <div class="tile is-child box">
-                        <div class="is-perfectly-centered">
-                            <figure class="image is-128x128">
-                                <img src="{{
-                                asset('svg/'. strtolower($program->name).'.svg')}}" />
-                            </figure>
-                        </div>
-                        <br />
-
-                        <p class="title is-4 has-text-centered">
-                            <span class="tag is-success is-rounded is-size-6"
-                                >{{ $program->price }} €</span
-                            ><br />
-                            Pack {{ $program->name }}
-                        </p>
-                        <ul>
-                            <li>
-                                <b>Formation :</b> {{ $program->formation }}
-                            </li>
-                            <br />
-                            <li>
-                                <b>Rémunération :</b> {{ $program->remuneration
-                                }}. <br />Dont
-                                <b class="has-text-warning"
-                                    >{{ $program->gains_per_email }}€
-                                </b>
-                                par email collecté et
-                                <b class="has-text-warning"
-                                    >{{ $program->gains_per_sale * 100 }}%</b
-                                >
-                                de commission par vente
-                            </li>
-                            <br />
-                            <li><b>Social :</b> {{ $program->social }}</li>
-                        </ul>
-                    </div>
-                </div>
-                @endforeach
+                    @foreach(App\Program::all() as $program)
+                    @component('components.program')
+                    @slot('program') {{ $program->name }} @endslot
+                    @slot('price') {{ $program->price }} @endslot
+                    @slot('formation') {{ $program->formation }} @endslot
+                    @slot('remuneration') {{ $program->remuneration }} @endslot
+                    @slot('gains_per_email') {{ $program->gains_per_email }} @endslot
+                    @slot('gains_per_sale') {{ $program->gains_per_sale * 100 }} @endslot
+                    @slot('social') {{ $program->social }} @endslot
+                    @slot('limit') {{ $program->gains_per_email_limit }} @endslot
+                    @endcomponent
+                    @endforeach
             </div>
 
             @foreach(App\Faq::where('category','Produit')->get()->chunk(3) as $chunk)

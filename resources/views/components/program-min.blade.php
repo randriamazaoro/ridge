@@ -17,6 +17,8 @@
 				<li><b>Rémunération :</b> {{ $remuneration }}.
 				<br/>Dont <b class="has-text-warning">{{ $gains_per_email }}€ </b> par email collecté et <b class="has-text-warning">{{ $gains_per_sale }}%</b> de commission par vente</li>
 				<li><b>Social :</b> {{ $social }}</li>
+				<li><b>Pour les affiliés:</b><br/> 
+					Etend la limite des gains approuvés de <b class="has-text-warning">{{ $limit }} e-mails</b> pour le CPA à chaque vente de ce produit.</li>
 			</ul>
 		</div>
 

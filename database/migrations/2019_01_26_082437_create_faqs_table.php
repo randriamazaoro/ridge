@@ -95,7 +95,8 @@ class CreateFaqsTable extends Migration
                 'tag' => 'is-warning',
             ],[
                 'question' => 'Combien peut-on gagner ? ',
-                'answer' => 'Pour les habitués d’affiliation et de marketing de réseau pour ne pas dire les professionnels, ils peuvent facilement se faire entre 1.000€ et 10.000€ par mois sur un site d’affiliation.<br/>
+                'answer' => 'Pour les habitués d’affiliation et de marketing de réseau pour ne pas dire les professionnels, ils peuvent facilement se faire entre 1.000€ et 10.000€ par mois sur un site d’affiliation.
+
                 Pour les nouveaux dans le monde de l\'affiliation, nous avons pensé à vous. Nous avons spécialement acheté un livre dédié à vous apprendre les bases. Vous pouvez le commander en insèrant votre adresse e-mail sur le formulaire tout en haut de la page d\'acceuil du site web',
                 'category' => 'Paiement',
                 'tag' => 'is-warning',
@@ -141,7 +142,9 @@ class CreateFaqsTable extends Migration
                 'tag' => 'is-success',
             ],[
                 'question' => 'Comment se présente la rémunération par la collecte d’adresse e-mail ?',
-                'answer' => 'C\'est simple, lorsque qu’une personne s’inscrit à partir de votre lien de référence, vous recevez entre 0.50€ et 1€ (selon le Pack que vous avez choisi). Ce dernier va s\'ajouter à votre solde, retirable lorsque le seuil minimum de paiement est atteint.',
+                'answer' => 'C\'est simple, lorsque qu’une personne s’inscrit à partir de votre lien de référence, vous recevez entre 0.50€ et 1€ (selon le Pack que vous avez choisi). Ce dernier va s\'ajouter à votre solde, retirable lorsque le seuil minimum de paiement est atteint.
+                
+                Notez bien qu\'au debut, les gains approuvés de la collecte sont limitées à 10 e-mails. Au-delà de cela, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite. ',
                 'category' => 'CPA & Affiliation',
                 'tag' => 'is-success',
             ],
