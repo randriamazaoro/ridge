@@ -25,7 +25,7 @@ class ContactController extends Controller
     	]);
 
     	Contact::create($request->all());
-    	Mail::to(User::find(1))->send(new SuperAdminHasNewMessage($request));
+    	Mail::to('contact@ridge.work')->send(new SuperAdminHasNewMessage($request));
 
     	return back()->with([
     					'code' => 'message-sent',
