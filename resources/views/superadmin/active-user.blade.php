@@ -1,17 +1,17 @@
 @extends('layouts.min.app')
 
 @section('title')
-	 | {{ $user->first_name }} {{ $user->last_name }}
+| {{ $user->first_name }} {{ $user->last_name }}
 @endsection
 
 @section('content')
 
 @component('components.header')
-    @slot('url_previous') {{ url('superadmin/users') }} @endslot 
-    @slot('tag_previous') Liste des utilisateurs @endslot 
-    @slot('tag_current') Détails de l'utilisateur @endslot 
+@slot('url_previous') {{ url('superadmin/users') }} @endslot
+@slot('tag_previous') Liste des utilisateurs @endslot
+@slot('tag_current') Détails de l'utilisateur @endslot
 
-    Détails de l'utilisateur
+Détails de l'utilisateur
 
 @endcomponent
 
@@ -80,10 +80,8 @@
 
         @isset($transfer_request)
         <div class="column is-4 is-offset-3">
-            <a 
-                href="{{ url('admin/transfer-request/delete') }}" 
-                class="button is-primary is-rounded is-fullwidth"
-                >Payer l'utilisateur</a>
+            <a href="{{ url('superadmin/finances/transfer-request/'.$affiliate->id) }}" class="button is-primary is-rounded is-fullwidth">Payer
+                l'utilisateur</a>
         </div>
         @endisset
 
@@ -95,11 +93,12 @@
             <div class="column is-3 is-perfectly-centered">
                 <figure class="image is-128x128">
                     <img src="{{ asset('svg/money-bag.svg') }}" />
-				</figure>
+                </figure>
             </div>
             <div class="column">
                 @isset($transfer_request)
-                <p class="title is-5">Cet utilisateur a demandé un virement de <span class="has-text-warning"> {{ $transfer_request->amount }}$ </span>.</p>
+                <p class="title is-5">Cet utilisateur a demandé un virement de <span class="has-text-warning"> {{
+                        $transfer_request->amount }}$ </span>.</p>
                 @endisset
                 @empty($transfer_request)
                 <p class="title is-5">Cet utilisateur n'a pas encore demandé un virement.</p>
@@ -110,52 +109,62 @@
     <br />
     <h2 class="title is-4">Statistiques de vente</h2>
     <a href="#details" class="box">
-		<div class="columns is-vcentered">
-			<div class="column is-3 is-perfectly-centered">
-				<figure class="image is-128x128">
-					<img src="{{ asset('svg/analytics-1.svg') }}" />
-				</figure>
-			</div>
+        <div class="columns is-vcentered">
+            <div class="column is-3 is-perfectly-centered">
+                <figure class="image is-128x128">
+                    <img src="{{ asset('svg/analytics-1.svg') }}" />
+                </figure>
+            </div>
 
-			<div class="column is-3">
-				<p class="heading">Approuvées</p>
-				<p class="title">{{ $approuved_sales_value + $approuved_emails_value }} €</p>
-			</div>
+            <div class="column is-3">
+                <p class="heading">Approuvés</p>
+                <p class="title">
+                    {{ $approuved_sales_value + $approuved_emails_value }} €
+                </p>
+            </div>
 
-			<div class="column is-3">
-				<p class="heading">En attente</p>
-				<p class="title">{{ $pending_emails_value}} €</p>
-			</div>
+            <div class="column is-3">
+                <p class="heading">En attente</p>
+                <p class="title">{{ $pending_emails_value }} €</p>
+            </div>
 
-			<div class="column is-3">
-				<p class="heading">Payées</p>
-				<p class="title">
-					{{ $paid_emails_value + $paid_sales_value}} €
-				</p>
-			</div>
-		</div>
-	</a>
+            <div class="column is-3">
+                <p class="heading">Emails collectées en cours</p>
+                <p class="title">{{ $emails->pending()->count() }} / <small class="tooltip is-tooltip-multiline"
+                        data-tooltip="Ceci est le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite. Après chaque retrait, cette dernière va être soustraite par le nombre d'e-mails approuvées que vous avez collecté.">{{
+                        $affiliate->gains_per_email_limit }}</small></p>
+            </div>
+        </div>
+    </a>
     <br />
     <h2 class="title is-4">Résumé des activités</h2>
     <a href="#details" class="box">
-		<div class="columns is-vcentered">
-			<div class="column is-3 is-perfectly-centered">
-				<figure class="image is-128x128">
-					<img src="{{ asset('svg/analytics.svg') }}" />
-				</figure>
-			</div>
+        <div class="columns is-vcentered">
+            <div class="column is-3 is-perfectly-centered">
+                <figure class="image is-128x128">
+                    <img src="{{ asset('svg/analytics.svg') }}" />
+                </figure>
+            </div>
 
-			<div class="column is-3">
-				<p class="heading">Ventes réalisées</p>
-				<p class="title">{{ $sales->count() }}</p>
-			</div>
+            <div class="column is-3">
+                <p class="heading">Total Ventes réalisées</p>
+                <p class="title">{{ $sales->count() }}</p>
+            </div>
 
-			<div class="column is-3">
-				<p class="heading">Email Collectées</p>
-				<p class="title">{{ $emails->count() }} / <small class="tooltip is-tooltip-multiline" data-tooltip="Ceci est la le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite.">{{ $affiliate->gains_per_email_limit }}</small></p>
-			</div>
-		</div>
-	</a>
+            <div class="column is-3">
+                <p class="heading">Total E-mails collectées</p>
+                <p class="title">{{ $emails->count() }}</p>
+            </div>
+
+            <div class="column is-3">
+                <p class="heading">Payées</p>
+                <p class="title">
+                    {{ $paid_emails_value + $paid_sales_value }} €
+                </p>
+            </div>
+
+        </div>
+    </a>
 </section>
 <hr />
 <section class="section container">
@@ -171,7 +180,7 @@
             <div class="column is-3 is-perfectly-centered">
                 <figure class="image is-128x128">
                     <img src="{{ asset('svg/'.strtolower($affiliate->program).'.svg') }}" />
-				</figure>
+                </figure>
             </div>
             <div class="column is-4 content">
                 <p>
@@ -191,8 +200,8 @@
                 <p>
                     <b>Lien de référence:</b><br />
                     <a href="{{ url('register?ref='.$affiliate->id) }}">
-						{{ config('app.url') }}/register?ref={{$affiliate->id}}
-					</a>
+                        {{ config('app.url') }}/register?ref={{$affiliate->id}}
+                    </a>
                 </p>
                 <p>
                     <b>Numéro d'affilié :</b><br />
@@ -212,11 +221,11 @@
             <div class="column is-3 is-perfectly-centered">
                 <figure class="image is-128x128">
                     <img src="{{ asset('svg/list.svg') }}" />
-				</figure>
+                </figure>
             </div>
             <div class="column">
                 <div class="table-container">
-                    <table class="table is-fullwidth" >
+                    <table class="table is-fullwidth">
                         <tr>
                             <th>Titre</th>
                             <th>Description</th>
@@ -235,7 +244,7 @@
                             </td>
                         </tr>
                         @endforeach
-                        
+
                         @else
                         @foreach($owned_themes as $owned_theme)
                         <tr>
@@ -250,11 +259,12 @@
                             </td>
                         </tr>
                         @endforeach
-                        
+
                         @endif
                     </table>
                 </div>
-                {{ $affiliate->program == "Ultra" ? $themes->fragment('themes')->links() : $owned_themes->fragment('themes')->links() }}
+                {{ $affiliate->program == "Ultra" ? $themes->fragment('themes')->links() :
+                $owned_themes->fragment('themes')->links() }}
             </div>
         </div>
     </div>
@@ -284,9 +294,7 @@
                             <td><b>{{ $email->created_at }}</b></td>
                             <td>{{ $email->referral_value }} €</td>
                             <td>
-                                <b class="tag is-rounded {{ $email->tag }}"
-                                    >{{ $email->status }}</b
-                                >
+                                <b class="tag is-rounded {{ $email->tag }}">{{ $email->status }}</b>
                             </td>
                         </tr>
                         @empty
@@ -323,9 +331,7 @@
                             <td>Pack {{ $sale->product }}</td>
                             <td>{{ $sale->referral_value }} €</td>
                             <td>
-                                <b class="tag is-rounded {{ $sale->tag }}"
-                                    >{{ $sale->status }}</b
-                                >
+                                <b class="tag is-rounded {{ $sale->tag }}">{{ $sale->status }}</b>
                             </td>
                         </tr>
                         @empty

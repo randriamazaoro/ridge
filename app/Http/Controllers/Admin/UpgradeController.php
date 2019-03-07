@@ -119,7 +119,7 @@ class UpgradeController extends Controller
 
 		return redirect('admin')->with([
     						'code' => 'transfer-requested',
-    						'image' => $program->name,
+    						'image' => strtolower($program->name),
     						'title' => 'La mise à niveau de votre programme a été réussie !',
     						'subtitle' => 'Nouveau programme: Pack '.$program->name,
     						]);

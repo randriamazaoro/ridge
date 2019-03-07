@@ -58,7 +58,7 @@ class TransferRequestController extends Controller
 		$total_value = 
 		$sales->sum('referral_value') + ($emails->count() * $affiliate->gains_per_email);
 
-		if($total_value > 10){
+		if($total_value > 50){
 			$emails->update(['requested' => true]);
 			$sales->update(['requested' => true]);
 

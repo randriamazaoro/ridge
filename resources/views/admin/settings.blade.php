@@ -169,10 +169,19 @@
 			<h1 class="title is-4">Programme</h1>
 		</div>
 		<div class="column is-2 is-offset-5">
-			<a 
+			@if($approuved_sales_value + $approuved_emails_value > 0)
+			<a
 				href="{{ url('admin/settings/upgrade') }}"
 				class="button is-primary is-rounded is-fullwidth"
-				>Mettre à niveau</a>
+				>Mettre à niveau</a
+				>
+	
+			@else
+			<button
+				class="button is-primary is-rounded is-fullwidth is-outlined tooltip" data-tooltip="Vous avez encore des gains en attente, veuillez les retirer avant de mettre à jour votre programme !" disabled
+				>Mettre à niveau</button
+			>
+			@endif
 		</div>
 	</div>
 	@component('components.program-min') 

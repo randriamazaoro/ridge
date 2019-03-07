@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'email' => 'contact@ridge.work',
+    'email' => 'randriamazaorotantelinirina@gmail.com',
 
     'url' => env('APP_URL', 'http://localhost:8000'),
 

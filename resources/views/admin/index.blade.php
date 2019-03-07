@@ -96,7 +96,7 @@
                 >Annuler ma demande de virement</a
             >
             @endisset @empty($transfer_request) @if($approuved_sales_value +
-            $approuved_emails_value > 10)
+            $approuved_emails_value > 50)
             <a
                 class="button is-primary is-rounded is-fullwidth"
                 href="{{ url('admin/transfer-request') }}"
@@ -126,7 +126,7 @@
                 <p class="title is-5">
                     Vous avez demandé un virement de
                     <span class="has-text-warning">
-                        {{ $transfer_request->amount }}$ </span
+                        {{ $transfer_request->amount }} € </span
                     >.
                 </p>
                 <p class="subtitle is-6">
@@ -177,11 +177,9 @@
             </div>
 
             <div class="column is-3">
-                <p class="heading">Payées</p>
-                <p class="title">
-                    {{ $paid_emails_value + $paid_sales_value }} €
-                </p>
-            </div>
+                    <p class="heading">Emails collectées en cours</p>
+                    <p class="title">{{ $emails->pending()->count() }} / <small class="tooltip is-tooltip-multiline" data-tooltip="Ceci est le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite. Après chaque retrait, cette dernière va être soustraite par le nombre d'e-mails approuvées que vous avez collecté.">{{ $affiliate->gains_per_email_limit }}</small></p>
+                </div>
         </div>
     </a>
     <br />
@@ -195,14 +193,22 @@
             </div>
 
             <div class="column is-3">
-                <p class="heading">Ventes réalisées</p>
+                <p class="heading">Total Ventes réalisées</p>
                 <p class="title">{{ $sales->count() }}</p>
             </div>
 
             <div class="column is-3">
-                <p class="heading">Email Collectées</p>
-                <p class="title">{{ $emails->count() }} / <small class="tooltip is-tooltip-multiline" data-tooltip="Ceci est la le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite. Après chaque retrait, cette dernière va être soustraite par le nombre d'e-mails approuvées que vous avez collecté.">{{ $affiliate->gains_per_email_limit }}</small></p>
-            </div>
+                    <p class="heading">Total E-mails collectées</p>
+                    <p class="title">{{ $emails->count() }}</p>
+                </div>
+
+            <div class="column is-3">
+                    <p class="heading">Payées</p>
+                    <p class="title">
+                        {{ $paid_emails_value + $paid_sales_value }} €
+                    </p>
+                </div>
+
         </div>
     </a>
 </section>
@@ -213,11 +219,20 @@
             <h1 class="title has-text-primary">Programme</h1>
         </div>
         <div class="column is-2 is-offset-5">
+            @if($approuved_sales_value + $approuved_emails_value > 0)
             <a
                 href="{{ url('admin/settings/upgrade') }}"
                 class="button is-primary is-rounded is-fullwidth"
                 >Mettre à niveau</a
             >
+
+            @else
+            <button
+                class="button is-primary is-rounded is-fullwidth is-outlined tooltip" data-tooltip="Vous avez encore des gains en attente, veuillez les retirer avant de mettre à jour votre programme !" disabled
+                >Mettre à niveau</button
+            >
+            @endif
+
         </div>
     </div>
     <br />
