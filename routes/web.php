@@ -124,12 +124,6 @@ Route::prefix('paypal')->group(function (){
 
 });
 
-Route::get('mail', function(){
-
-
-	return new App\Mail\UserHasRequestedEbook;
-});
-
 
 Route::get('/logout', function(){
 	Auth::logout();
