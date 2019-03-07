@@ -169,7 +169,7 @@
 			<h1 class="title is-4">Programme</h1>
 		</div>
 		<div class="column is-2 is-offset-5">
-			@if($approuved_sales_value + $approuved_emails_value > 0)
+			@if($approuved_sales_value + $approuved_emails_value == 0)
 			<a
 				href="{{ url('admin/settings/upgrade') }}"
 				class="button is-primary is-rounded is-fullwidth"

@@ -37,7 +37,7 @@ class UserHasSale extends Mailable
     public function build()
     {
         return $this->markdown('emails.user.has-sale')
-                    ->subject('Vous avez une vente confirmée !')
+                    ->subject('Félicitations ! Vous avez une vente confirmée !')
                         ->with([
                             'sale' => $this->sale,
                             'affiliate' => $this->affiliate,

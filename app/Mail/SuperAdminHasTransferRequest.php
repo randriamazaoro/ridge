@@ -31,6 +31,7 @@ class SuperAdminHasTransferRequest extends Mailable
     public function build()
     {
         return $this->markdown('emails.superadmin.has-transfer-request')
+                    ->subject('Vous avez une nouvelle demande de retrait !')
                     ->with([
                             'transfer_request' => $this->transfer_request,
                         ]);

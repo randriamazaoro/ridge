@@ -31,7 +31,7 @@ class UserHasForgottenPassword extends Mailable
     public function build()
     {
         return $this->markdown('emails.user.has-forgotten-password')
-                    ->subject('Réinitialisation de votre mot de passe !')
+                    ->subject('Votre demande de réinitialisation du mot de passe !')
                         ->with([
                             'url' => $this->url,
                         ]);

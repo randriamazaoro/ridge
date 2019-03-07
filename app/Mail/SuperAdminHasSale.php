@@ -39,6 +39,7 @@ class SuperAdminHasSale extends Mailable
     public function build()
     {
         return $this->markdown('emails.superadmin.has-sale')
+                    ->subject('Un nouvel utilisateur vient de terminer sa phase d\'initiation !')
                     ->with([
                             'sale' => $this->sale,
                             'affiliate' => $this->affiliate,

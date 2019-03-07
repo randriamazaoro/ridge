@@ -34,6 +34,6 @@ class UserHasCompletedRegistration extends Mailable
                         ->with([
                             'url' => $this->url,
                         ])
-                        ->subject('Bonjour et bienvenue chez Ridge !');
+                        ->subject('Bienvenue chez Ridge ! Veuillez vérifier votre adresse e-mail !');
     }
 }
