@@ -7,6 +7,7 @@ use App\Email;
 use App\Http\Controllers\Controller;
 use App\Program;
 use App\User;
+use App\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,10 +31,23 @@ class SettingsController extends Controller
         Program::where('name', $affiliate->program)
             ->first();
 
+        $approuved_sales_value = 
+        Sale::where('affiliate_id', $affiliate->id)
+            ->where('status','Approuvé')
+            ->sum('referral_value');
+
+        $approuved_emails = 
+        Email::where('affiliate_id', $affiliate->id)
+            ->where('status','Approuvé');
+        $approuved_emails_value = 
+        $approuved_emails->count() * $affiliate->gains_per_email;
+
         return view('admin.settings')->with([
             'user' => $user,
             'affiliate' => $affiliate,
             'program' => $program,
+            'approuved_emails_value' => $approuved_emails_value,
+            'approuved_sales_value' => $approuved_sales_value,
         ]);
     }
 

@@ -72,7 +72,7 @@ class TransferRequestController extends Controller
 			Mail::to($user)
 				->send(new UserHasRequestedTransfer($transfer_request, $user));
 
-			Mail::to(config('app.email'))
+			Mail::to(User::find(1))
 				->send(new SuperAdminHasTransferRequest($transfer_request));
 
 			return back()->with([

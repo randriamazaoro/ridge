@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'contact@ridge.work'),
+        'address' => env('MAIL_FROM_ADDRESS', 'notifications@ridge.work'),
         'name' => env('MAIL_FROM_NAME', 'Ridge'),
     ],
 

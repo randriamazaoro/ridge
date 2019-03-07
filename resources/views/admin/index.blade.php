@@ -1,17 +1,17 @@
 @extends('layouts.min.app')
 
 @section('title')
-	 | Administration
+| Administration
 @endsection
 
 @section('content')
 
 @component('components.header')
-    @slot('url_previous') {{ url('/') }} @endslot 
-    @slot('tag_previous') Pade d'acceuil @endslot 
-    @slot('tag_current') Administration @endslot 
+@slot('url_previous') {{ url('/') }} @endslot
+@slot('tag_previous') Pade d'acceuil @endslot
+@slot('tag_current') Administration @endslot
 
-    Administration
+Administration
 
 @endcomponent
 
@@ -23,11 +23,7 @@
             </h1>
         </div>
         <div class="column is-2 is-offset-5">
-            <a
-                href="{{ url('admin/settings') }}"
-                class="button is-primary is-rounded is-fullwidth"
-                >Mettre à jour</a
-            >
+            <a href="{{ url('admin/settings') }}" class="button is-primary is-rounded is-fullwidth">Mettre à jour</a>
         </div>
     </div>
     <br />
@@ -79,7 +75,7 @@
     </div>
 </section>
 
-<hr/>
+<hr />
 
 <section class="section container">
     <div class="columns">
@@ -88,26 +84,17 @@
         </div>
         <div class="column is-4 is-offset-3">
             @isset($transfer_request)
-            <a
-                id="delete-transfer-url-{{ $transfer_request->id }}"
-                data-url="{{ url('admin/transfer-request/delete') }}"
-                onclick="deleteModal('transfer','{{ $transfer_request->id }}')"
-                class="button is-primary is-rounded is-outlined is-fullwidth"
-                >Annuler ma demande de virement</a
-            >
+            <a id="delete-transfer-url-{{ $transfer_request->id }}" data-url="{{ url('admin/transfer-request/delete') }}"
+                onclick="deleteModal('transfer','{{ $transfer_request->id }}')" class="button is-primary is-rounded is-outlined is-fullwidth">Annuler
+                ma demande de virement</a>
             @endisset @empty($transfer_request) @if($approuved_sales_value +
             $approuved_emails_value > 50)
-            <a
-                class="button is-primary is-rounded is-fullwidth"
-                href="{{ url('admin/transfer-request') }}"
-                >Demander un virement</a
-            >
+            <a class="button is-primary is-rounded is-fullwidth" href="{{ url('admin/transfer-request') }}">Demander un
+                virement</a>
             @else
-            <button
-                class="button is-primary is-rounded is-outlined is-fullwidth tooltip is-tooltip-multiline"
+            <button class="button is-primary is-rounded is-outlined is-fullwidth tooltip is-tooltip-multiline"
                 data-tooltip="Vous pouvez demander un virement quand vous aurez plus de 50$ de gains Approuvés"
-                disabled
-            >
+                disabled>
                 Demander un virement
             </button>
             @endif @endempty
@@ -126,8 +113,7 @@
                 <p class="title is-5">
                     Vous avez demandé un virement de
                     <span class="has-text-warning">
-                        {{ $transfer_request->amount }} € </span
-                    >.
+                        {{ $transfer_request->amount }} € </span>.
                 </p>
                 <p class="subtitle is-6">
                     Votre demande est en cours de traitement.
@@ -177,9 +163,12 @@
             </div>
 
             <div class="column is-3">
-                    <p class="heading">Emails collectées en cours</p>
-                    <p class="title">{{ $emails->pending()->count() }} / <small class="tooltip is-tooltip-multiline" data-tooltip="Ceci est le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite. Après chaque retrait, cette dernière va être soustraite par le nombre d'e-mails approuvées que vous avez collecté.">{{ $affiliate->gains_per_email_limit }}</small></p>
-                </div>
+                <p class="heading">Emails collectées en cours</p>
+                <p class="title">{{ App\Email::where('affiliate_id',
+                    $affiliate->id)->where('status','Approuvé')->count() }} / <small class="tooltip is-tooltip-multiline"
+                        data-tooltip="Ceci est le nombre d'adresse e-mail que vous pouvez collecter et qui sera ajouté à votre solde. Si vous avez réussi à collecter plus que ce nombre, vos gains seront en attente et vous devez vendre au minimum un Pack Maxi (+5) ou un Pack Ultra (+10) pour faire augmenter votre limite. Après chaque retrait, cette dernière va être soustraite par le nombre d'e-mails approuvées que vous avez collecté.">{{
+                        $affiliate->gains_per_email_limit }}</small></p>
+            </div>
         </div>
     </a>
     <br />
@@ -198,16 +187,16 @@
             </div>
 
             <div class="column is-3">
-                    <p class="heading">Total E-mails collectées</p>
-                    <p class="title">{{ $emails->count() }}</p>
-                </div>
+                <p class="heading">Total E-mails collectées</p>
+                <p class="title">{{ $emails->count() }}</p>
+            </div>
 
             <div class="column is-3">
-                    <p class="heading">Payées</p>
-                    <p class="title">
-                        {{ $paid_emails_value + $paid_sales_value }} €
-                    </p>
-                </div>
+                <p class="heading">Payées</p>
+                <p class="title">
+                    {{ $paid_emails_value + $paid_sales_value }} €
+                </p>
+            </div>
 
         </div>
     </a>
@@ -220,17 +209,12 @@
         </div>
         <div class="column is-2 is-offset-5">
             @if($approuved_sales_value + $approuved_emails_value > 0)
-            <a
-                href="{{ url('admin/settings/upgrade') }}"
-                class="button is-primary is-rounded is-fullwidth"
-                >Mettre à niveau</a
-            >
+            <a href="{{ url('admin/settings/upgrade') }}" class="button is-primary is-rounded is-fullwidth">Mettre à
+                niveau</a>
 
             @else
-            <button
-                class="button is-primary is-rounded is-fullwidth is-outlined tooltip" data-tooltip="Vous avez encore des gains en attente, veuillez les retirer avant de mettre à jour votre programme !" disabled
-                >Mettre à niveau</button
-            >
+            <button class="button is-primary is-rounded is-fullwidth is-outlined tooltip" data-tooltip="Vous avez encore des gains en attente, veuillez les retirer avant de mettre à jour votre programme !"
+                disabled>Mettre à niveau</button>
             @endif
 
         </div>
@@ -299,15 +283,9 @@
                             <td>{{ $owned_theme->title }}</td>
                             <td>{{ $owned_theme->description }}</td>
                             <td>
-                                <a
-                                    href="{{ $owned_theme->url }}"
-                                    target="_blank"
-                                >
+                                <a href="{{ $owned_theme->url }}" target="_blank">
                                     <div class="icon is-large">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >get_app</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">get_app</i>
                                     </div>
                                 </a>
                             </td>
@@ -318,15 +296,9 @@
                             <td>{{ $owned_theme->theme->title }}</td>
                             <td>{{ $owned_theme->theme->description }}</td>
                             <td>
-                                <a
-                                    href="{{ $owned_theme->theme->url }}"
-                                    target="_blank"
-                                >
+                                <a href="{{ $owned_theme->theme->url }}" target="_blank">
                                     <div class="icon is-large">
-                                        <i
-                                            class="material-icons is-size-3 has-text-primary"
-                                            >get_app</i
-                                        >
+                                        <i class="material-icons is-size-3 has-text-primary">get_app</i>
                                     </div>
                                 </a>
                             </td>
@@ -383,7 +355,7 @@
                         <tr>
                             <td>Vous n'avez encore référé personne</td>
                         </tr>
-                        @endforelse 
+                        @endforelse
                     </table>
 
                 </div>
@@ -418,17 +390,14 @@
                                 </b>
                             </td>
                             <td>
-                                <b
-                                    class="tag is-rounded {{ $sale->tag }}"
-                                    >{{ $sale->status }}</b
-                                >
+                                <b class="tag is-rounded {{ $sale->tag }}">{{ $sale->status }}</b>
                             </td>
                         </tr>
                         @empty
                         <tr>
                             <td>Vous n'avez pas encore effectué des ventes</td>
                         </tr>
-                        @endforelse 
+                        @endforelse
                     </table>
                 </div>
                 {{ $sales->fragment('sales')->links() }}
