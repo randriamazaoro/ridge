@@ -30,21 +30,6 @@ host('178.62.107.10')
     
 // Tasks
 
-desc('Execute artisan cache:clear');
-task('artisan:cache:clear', function () {
-    run('{{bin/php}} {{release_path}}/artisan cache:clear');
-});
-
-desc('Execute artisan config:cache');
-task('artisan:config:cache', function () {
-    run('{{bin/php}} {{release_path}}/artisan config:cache');
-});
-
-desc('Execute artisan migrate:fresh');
-task('artisan:migrate:fresh', function () {
-    run('{{bin/php}} {{release_path}}/artisan migrate:fresh --force');
-});
-
 task('build', function () {
     run('cd {{release_path}} && build');
 });
