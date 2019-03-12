@@ -1,6 +1,6 @@
 <hr />
-<br/>
-<footer class="container">
+<footer class="section">
+    <div class="container">
     <small>
         <div class="columns">
             <div class="column is-4">
@@ -59,7 +59,8 @@
                         <img src="{{ asset("svg/social/linkedin.svg") }}" />
                     </figure>
                 </a>
-            </a>
+            </span>
         </div>
     </small>
+</div>
 </footer>

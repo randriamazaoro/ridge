@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert([
             'name' => 'Superadmin',
             'affiliate_id' => 1,
-            'email' => 'contact@ridge.work',
+            'email' => 'support@ridge.work',
             'paypal_address' => 'zekemahery@gmail.com',
             'password' => Hash::make('Azerty012'),
             'role' => 1,

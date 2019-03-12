@@ -56,7 +56,7 @@ class CreateProgramsTable extends Migration
             'social' => '1000 groupes Facebook',
             'advantages' => 'Une liste des Business en ligne',
             'gains_per_email' => 1,
-            'gains_per_sale' => 0.15,
+            'gains_per_sale' => 0.30,
             'gains_per_email_limit' => 10,
         ]
         ]);

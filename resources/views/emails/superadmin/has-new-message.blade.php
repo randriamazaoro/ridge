@@ -15,8 +15,8 @@
 
 <br/>
 
-@component('mail::button', ['url' => url("superadmin")])
-Aller au panneau de contrôle
+@component('mail::button', ['url' => 'mailto:'. $request->email])
+Répondre
 @endcomponent
 
 @endcomponent
